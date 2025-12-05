@@ -1,0 +1,292 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Foundations of Physical AI",
+    "section": "",
+    "text": "Welcome\nThis is the course book for Foundations of Physical AI.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "Foundations of Physical AI",
+    "section": "Course Overview",
+    "text": "Course Overview\nThis course covers the fundamental concepts and techniques in physical AI systems, including:\n\nThe Spatial Mind: Understanding spatial representations and robotic kinematics\nThe Visual Link: Vision systems and 3D perception for robotics\nThe Geometric Navigator: Path planning and trajectory generation\nThe Adaptive Learner: Reinforcement learning and sim-to-real transfer",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use-this-book",
+    "href": "index.html#how-to-use-this-book",
+    "title": "Foundations of Physical AI",
+    "section": "How to Use This Book",
+    "text": "How to Use This Book\nEach chapter contains: - Conceptual topic sections - A quiz to test your understanding - A lab introduction to apply the concepts hands-on",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "chapter1/index.html",
+    "href": "chapter1/index.html",
+    "title": "The Spatial Mind",
+    "section": "",
+    "text": "This chapter explores spatial representations and transformations fundamental to physical AI systems.",
+    "crumbs": [
+      "The Spatial Mind"
+    ]
+  },
+  {
+    "objectID": "chapter1/1-1-spatial-descriptions.html",
+    "href": "chapter1/1-1-spatial-descriptions.html",
+    "title": "1  Spatial Descriptions & Transformations",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Spatial Mind",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Spatial Descriptions & Transformations</span>"
+    ]
+  },
+  {
+    "objectID": "chapter1/1-2-kinematic-chain.html",
+    "href": "chapter1/1-2-kinematic-chain.html",
+    "title": "2  The Kinematic Chain",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Spatial Mind",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>The Kinematic Chain</span>"
+    ]
+  },
+  {
+    "objectID": "chapter1/1-3-degrees-of-freedom.html",
+    "href": "chapter1/1-3-degrees-of-freedom.html",
+    "title": "3  Degrees of Freedom (DoF) & Workspace",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Spatial Mind",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Degrees of Freedom (DoF) & Workspace</span>"
+    ]
+  },
+  {
+    "objectID": "chapter1/1-4-quiz.html",
+    "href": "chapter1/1-4-quiz.html",
+    "title": "4  Quiz",
+    "section": "",
+    "text": "Quiz questions for Chapter 1 will be added here.",
+    "crumbs": [
+      "The Spatial Mind",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Quiz</span>"
+    ]
+  },
+  {
+    "objectID": "chapter1/1-5-lab-intro.html",
+    "href": "chapter1/1-5-lab-intro.html",
+    "title": "5  Lab Introduction",
+    "section": "",
+    "text": "Lab introduction and instructions for Chapter 1 will be added here.",
+    "crumbs": [
+      "The Spatial Mind",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lab Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapter2/index.html",
+    "href": "chapter2/index.html",
+    "title": "The Visual Link",
+    "section": "",
+    "text": "This chapter covers vision systems and 3D perception for robotics.",
+    "crumbs": [
+      "The Visual Link"
+    ]
+  },
+  {
+    "objectID": "chapter2/2-1-pinhole-camera.html",
+    "href": "chapter2/2-1-pinhole-camera.html",
+    "title": "6  The Pinhole Camera Model",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Visual Link",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>The Pinhole Camera Model</span>"
+    ]
+  },
+  {
+    "objectID": "chapter2/2-2-3d-data.html",
+    "href": "chapter2/2-2-3d-data.html",
+    "title": "7  3D Data Representations",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Visual Link",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>3D Data Representations</span>"
+    ]
+  },
+  {
+    "objectID": "chapter2/2-3-hand-eye-calibration.html",
+    "href": "chapter2/2-3-hand-eye-calibration.html",
+    "title": "8  Hand-Eye Calibration",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Visual Link",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Hand-Eye Calibration</span>"
+    ]
+  },
+  {
+    "objectID": "chapter2/2-4-quiz.html",
+    "href": "chapter2/2-4-quiz.html",
+    "title": "9  Quiz",
+    "section": "",
+    "text": "Quiz questions for Chapter 2 will be added here.",
+    "crumbs": [
+      "The Visual Link",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Quiz</span>"
+    ]
+  },
+  {
+    "objectID": "chapter2/2-5-lab-intro.html",
+    "href": "chapter2/2-5-lab-intro.html",
+    "title": "10  Lab Introduction",
+    "section": "",
+    "text": "Lab introduction and instructions for Chapter 2 will be added here.",
+    "crumbs": [
+      "The Visual Link",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lab Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapter3/index.html",
+    "href": "chapter3/index.html",
+    "title": "The Geometric Navigator",
+    "section": "",
+    "text": "This chapter explores path planning and trajectory generation techniques.",
+    "crumbs": [
+      "The Geometric Navigator"
+    ]
+  },
+  {
+    "objectID": "chapter3/3-1-configuration-space.html",
+    "href": "chapter3/3-1-configuration-space.html",
+    "title": "11  Configuration Space (C-Space)",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Geometric Navigator",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Configuration Space (C-Space)</span>"
+    ]
+  },
+  {
+    "objectID": "chapter3/3-2-planning-approaches.html",
+    "href": "chapter3/3-2-planning-approaches.html",
+    "title": "12  Modern Planning Approaches",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Geometric Navigator",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Modern Planning Approaches</span>"
+    ]
+  },
+  {
+    "objectID": "chapter3/3-3-trajectory-generation.html",
+    "href": "chapter3/3-3-trajectory-generation.html",
+    "title": "13  Trajectory Generation",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Geometric Navigator",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Trajectory Generation</span>"
+    ]
+  },
+  {
+    "objectID": "chapter3/3-4-quiz.html",
+    "href": "chapter3/3-4-quiz.html",
+    "title": "14  Quiz",
+    "section": "",
+    "text": "Quiz questions for Chapter 3 will be added here.",
+    "crumbs": [
+      "The Geometric Navigator",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Quiz</span>"
+    ]
+  },
+  {
+    "objectID": "chapter3/3-5-lab-intro.html",
+    "href": "chapter3/3-5-lab-intro.html",
+    "title": "15  Lab Introduction",
+    "section": "",
+    "text": "Lab introduction and instructions for Chapter 3 will be added here.",
+    "crumbs": [
+      "The Geometric Navigator",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lab Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapter4/index.html",
+    "href": "chapter4/index.html",
+    "title": "The Adaptive Learner",
+    "section": "",
+    "text": "This chapter covers reinforcement learning and sim-to-real transfer.",
+    "crumbs": [
+      "The Adaptive Learner"
+    ]
+  },
+  {
+    "objectID": "chapter4/4-1-markov-decision.html",
+    "href": "chapter4/4-1-markov-decision.html",
+    "title": "16  The Markov Decision Process (MDP)",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Adaptive Learner",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>The Markov Decision Process (MDP)</span>"
+    ]
+  },
+  {
+    "objectID": "chapter4/4-2-reward-engineering.html",
+    "href": "chapter4/4-2-reward-engineering.html",
+    "title": "17  Reward Engineering",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Adaptive Learner",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Reward Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "chapter4/4-3-reality-gap.html",
+    "href": "chapter4/4-3-reality-gap.html",
+    "title": "18  The Reality Gap (Sim2Real)",
+    "section": "",
+    "text": "Content for this section will be added here.",
+    "crumbs": [
+      "The Adaptive Learner",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>The Reality Gap (Sim2Real)</span>"
+    ]
+  },
+  {
+    "objectID": "chapter4/4-4-quiz.html",
+    "href": "chapter4/4-4-quiz.html",
+    "title": "19  Quiz",
+    "section": "",
+    "text": "Quiz questions for Chapter 4 will be added here.",
+    "crumbs": [
+      "The Adaptive Learner",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Quiz</span>"
+    ]
+  },
+  {
+    "objectID": "chapter4/4-5-lab-intro.html",
+    "href": "chapter4/4-5-lab-intro.html",
+    "title": "20  Lab Introduction",
+    "section": "",
+    "text": "Lab introduction and instructions for Chapter 4 will be added here.",
+    "crumbs": [
+      "The Adaptive Learner",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Lab Introduction</span>"
+    ]
+  }
+]
