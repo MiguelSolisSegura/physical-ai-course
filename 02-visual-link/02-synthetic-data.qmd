@@ -1,0 +1,9 @@
+# Synthetic Data & The Reality Gap
+
+## The Reality Gap
+
+- Distribution shifts between sim and real.
+
+## Domain Randomization (DR) Theory
+
+- Learning invariant features via randomized physics/rendering.

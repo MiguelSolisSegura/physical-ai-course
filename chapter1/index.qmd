@@ -1,3 +1,0 @@
-# The Spatial Mind {#sec-spatial-mind}
-
-This chapter explores spatial representations and transformations fundamental to physical AI systems.

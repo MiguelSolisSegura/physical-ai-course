@@ -1,3 +1,0 @@
-# The Geometric Navigator {#sec-geometric-navigator}
-
-This chapter explores path planning and trajectory generation techniques.

@@ -1,0 +1,15 @@
+# Modern Rigid Body Mechanics
+
+## The Special Euclidean Group $SE(3)$
+
+- Rotation Matrices vs. Unit Quaternions.
+
+## Screw Theory
+
+- Representing joints as screw axes $\mathcal{S}$.
+
+## The Product of Exponentials (PoE) Formula
+
+- The modern alternative to Denavit-Hartenberg.
+
+## Homogeneous Transformation Matrices

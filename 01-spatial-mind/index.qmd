@@ -1,0 +1,9 @@
+# Introduction
+
+This chapter lays the mathematical foundation for describing robot motion and configuration in 3D space.
+
+## Topics
+
+- Modern Rigid Body Mechanics ($SE(3)$)
+- Differential Kinematics & Numerical Solvers
+- Lab: The Stasis Loader

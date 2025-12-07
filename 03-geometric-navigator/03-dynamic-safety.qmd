@@ -1,0 +1,9 @@
+# Dynamic Safety
+
+## The Tunneling Effect
+
+- Discrete time steps vs. continuous motion.
+
+## Continuous Collision Detection (CCD)
+
+- Swept Volumes.

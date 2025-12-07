@@ -1,0 +1,81 @@
+/*-- scss:defaults --*/
+
+// Vlexyan Rebirth Palette
+$void-dark: #1a1b1e;
+$starlight-silver: #e0e0e0;
+$bio-mint: #00f2aa;
+$infrastructure-slate: #4a5568;
+$warning-amber: #f6b93b;
+
+// Base
+$body-bg: $void-dark;
+$body-color: $starlight-silver;
+$link-color: $bio-mint;
+$link-hover-color: lighten($bio-mint, 15%);
+
+// Typography
+$font-family-sans-serif: "Inter", system-ui, -apple-system, sans-serif;
+$headings-color: $bio-mint;
+$headings-font-family: "Inter", sans-serif;
+
+// Sidebar
+$sidebar-bg: darken($void-dark, 3%);
+$sidebar-fg: $starlight-silver;
+$sidebar-active-bg: rgba($bio-mint, 0.1);
+$sidebar-active-fg: $bio-mint;
+
+// Code
+$code-color: lighten($bio-mint, 20%);
+$code-bg: darken($void-dark, 5%);
+
+// Components
+$navbar-bg: $void-dark;
+$navbar-fg: $bio-mint;
+$light: $starlight-silver;
+$dark: $void-dark;
+$primary: $bio-mint;
+$secondary: $infrastructure-slate;
+
+/*-- scss:rules --*/
+
+// Custom Aesthetics
+.sidebar-title {
+    color: $bio-mint !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+// "Glass" effect for callouts or boxes if needed in future
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-shadow: 0 0 10px rgba($bio-mint, 0.2);
+}
+
+// Sidebar navigation styling
+.sidebar-item-active>a {
+    border-left: 3px solid $bio-mint;
+    padding-left: 0.8rem;
+}
+
+// Scrollbar styling for that futuristic feel
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: $void-dark;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $infrastructure-slate;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $bio-mint;
+}

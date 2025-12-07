@@ -1,3 +1,0 @@
-# The Adaptive Learner {#sec-adaptive-learner}
-
-This chapter covers reinforcement learning and sim-to-real transfer.

@@ -1,3 +1,0 @@
-# The Pinhole Camera Model
-
-Content for this section will be added here.

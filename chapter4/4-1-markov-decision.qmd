@@ -1,3 +1,0 @@
-# The Markov Decision Process (MDP)
-
-Content for this section will be added here.

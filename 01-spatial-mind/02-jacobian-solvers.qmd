@@ -1,0 +1,14 @@
+# The Jacobian & Numerical Solvers
+
+## Differential Kinematics
+
+- Geometric Jacobian (angular velocity) vs. Analytical Jacobian (Euler rates).
+
+## Numerical Inverse Kinematics (IK)
+
+- Newton-Raphson method.
+- Damped Least Squares method.
+
+## Singularities
+
+- Rank loss and infinite velocities.

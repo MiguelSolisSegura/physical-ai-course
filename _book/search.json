@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Foundations of Physical AI",
     "section": "",
-    "text": "Welcome\nThis is the course book for Foundations of Physical AI.",
+    "text": "Welcome\nWelcome to the Foundations of Physical AI course.\nThis course explores the intersection of robotics, computer vision, and machine learning, focusing on how physical agents perceive, reason, and act in the world.",
     "crumbs": [
       "Welcome"
     ]
@@ -14,279 +14,559 @@
     "href": "index.html#course-overview",
     "title": "Foundations of Physical AI",
     "section": "Course Overview",
-    "text": "Course Overview\nThis course covers the fundamental concepts and techniques in physical AI systems, including:\n\nThe Spatial Mind: Understanding spatial representations and robotic kinematics\nThe Visual Link: Vision systems and 3D perception for robotics\nThe Geometric Navigator: Path planning and trajectory generation\nThe Adaptive Learner: Reinforcement learning and sim-to-real transfer",
+    "text": "Course Overview\n\nChapter 1: The Spatial Mind: Kinematics, rigid body mechanics, and numerical solvers.\nChapter 2: The Visual Link: Computer vision, camera models, and synthetic data.\nChapter 3: The Geometric Navigator: Motion planning, trajectory optimization, and collision avoidance.\nChapter 4: The Adaptive Learner: Reinforcement learning, safety, and sim-to-real transfer.",
     "crumbs": [
       "Welcome"
     ]
   },
   {
-    "objectID": "index.html#how-to-use-this-book",
-    "href": "index.html#how-to-use-this-book",
-    "title": "Foundations of Physical AI",
-    "section": "How to Use This Book",
-    "text": "How to Use This Book\nEach chapter contains: - Conceptual topic sections - A quiz to test your understanding - A lab introduction to apply the concepts hands-on",
+    "objectID": "01-spatial-mind/index.html",
+    "href": "01-spatial-mind/index.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "1.1 Topics\nThis chapter lays the mathematical foundation for describing robot motion and configuration in 3D space.",
     "crumbs": [
-      "Welcome"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
-    "objectID": "chapter1/index.html",
-    "href": "chapter1/index.html",
-    "title": "The Spatial Mind",
+    "objectID": "01-spatial-mind/index.html#topics",
+    "href": "01-spatial-mind/index.html#topics",
+    "title": "1  Introduction",
     "section": "",
-    "text": "This chapter explores spatial representations and transformations fundamental to physical AI systems.",
+    "text": "Modern Rigid Body Mechanics (\\(SE(3)\\))\nDifferential Kinematics & Numerical Solvers\nLab: The Stasis Loader",
     "crumbs": [
-      "The Spatial Mind"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
-    "objectID": "chapter1/1-1-spatial-descriptions.html",
-    "href": "chapter1/1-1-spatial-descriptions.html",
-    "title": "1  Spatial Descriptions & Transformations",
+    "objectID": "01-spatial-mind/01-rigid-body-mechanics.html",
+    "href": "01-spatial-mind/01-rigid-body-mechanics.html",
+    "title": "2  Modern Rigid Body Mechanics",
     "section": "",
-    "text": "Content for this section will be added here.",
+    "text": "2.1 The Special Euclidean Group \\(SE(3)\\)",
     "crumbs": [
-      "The Spatial Mind",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Spatial Descriptions & Transformations</span>"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Modern Rigid Body Mechanics</span>"
     ]
   },
   {
-    "objectID": "chapter1/1-2-kinematic-chain.html",
-    "href": "chapter1/1-2-kinematic-chain.html",
-    "title": "2  The Kinematic Chain",
+    "objectID": "01-spatial-mind/01-rigid-body-mechanics.html#the-special-euclidean-group-se3",
+    "href": "01-spatial-mind/01-rigid-body-mechanics.html#the-special-euclidean-group-se3",
+    "title": "2  Modern Rigid Body Mechanics",
     "section": "",
-    "text": "Content for this section will be added here.",
+    "text": "Rotation Matrices vs. Unit Quaternions.",
     "crumbs": [
-      "The Spatial Mind",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>The Kinematic Chain</span>"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Modern Rigid Body Mechanics</span>"
     ]
   },
   {
-    "objectID": "chapter1/1-3-degrees-of-freedom.html",
-    "href": "chapter1/1-3-degrees-of-freedom.html",
-    "title": "3  Degrees of Freedom (DoF) & Workspace",
-    "section": "",
-    "text": "Content for this section will be added here.",
+    "objectID": "01-spatial-mind/01-rigid-body-mechanics.html#screw-theory",
+    "href": "01-spatial-mind/01-rigid-body-mechanics.html#screw-theory",
+    "title": "2  Modern Rigid Body Mechanics",
+    "section": "2.2 Screw Theory",
+    "text": "2.2 Screw Theory\n\nRepresenting joints as screw axes \\(\\mathcal{S}\\).",
     "crumbs": [
-      "The Spatial Mind",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Degrees of Freedom (DoF) & Workspace</span>"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Modern Rigid Body Mechanics</span>"
     ]
   },
   {
-    "objectID": "chapter1/1-4-quiz.html",
-    "href": "chapter1/1-4-quiz.html",
-    "title": "4  Quiz",
-    "section": "",
-    "text": "Quiz questions for Chapter 1 will be added here.",
+    "objectID": "01-spatial-mind/01-rigid-body-mechanics.html#the-product-of-exponentials-poe-formula",
+    "href": "01-spatial-mind/01-rigid-body-mechanics.html#the-product-of-exponentials-poe-formula",
+    "title": "2  Modern Rigid Body Mechanics",
+    "section": "2.3 The Product of Exponentials (PoE) Formula",
+    "text": "2.3 The Product of Exponentials (PoE) Formula\n\nThe modern alternative to Denavit-Hartenberg.",
     "crumbs": [
-      "The Spatial Mind",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Quiz</span>"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Modern Rigid Body Mechanics</span>"
     ]
   },
   {
-    "objectID": "chapter1/1-5-lab-intro.html",
-    "href": "chapter1/1-5-lab-intro.html",
-    "title": "5  Lab Introduction",
-    "section": "",
-    "text": "Lab introduction and instructions for Chapter 1 will be added here.",
+    "objectID": "01-spatial-mind/01-rigid-body-mechanics.html#homogeneous-transformation-matrices",
+    "href": "01-spatial-mind/01-rigid-body-mechanics.html#homogeneous-transformation-matrices",
+    "title": "2  Modern Rigid Body Mechanics",
+    "section": "2.4 Homogeneous Transformation Matrices",
+    "text": "2.4 Homogeneous Transformation Matrices",
     "crumbs": [
-      "The Spatial Mind",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lab Introduction</span>"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Modern Rigid Body Mechanics</span>"
     ]
   },
   {
-    "objectID": "chapter2/index.html",
-    "href": "chapter2/index.html",
-    "title": "The Visual Link",
+    "objectID": "01-spatial-mind/02-jacobian-solvers.html",
+    "href": "01-spatial-mind/02-jacobian-solvers.html",
+    "title": "3  The Jacobian & Numerical Solvers",
     "section": "",
-    "text": "This chapter covers vision systems and 3D perception for robotics.",
+    "text": "3.1 Differential Kinematics",
     "crumbs": [
-      "The Visual Link"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>The Jacobian & Numerical Solvers</span>"
     ]
   },
   {
-    "objectID": "chapter2/2-1-pinhole-camera.html",
-    "href": "chapter2/2-1-pinhole-camera.html",
-    "title": "6  The Pinhole Camera Model",
+    "objectID": "01-spatial-mind/02-jacobian-solvers.html#differential-kinematics",
+    "href": "01-spatial-mind/02-jacobian-solvers.html#differential-kinematics",
+    "title": "3  The Jacobian & Numerical Solvers",
     "section": "",
-    "text": "Content for this section will be added here.",
+    "text": "Geometric Jacobian (angular velocity) vs. Analytical Jacobian (Euler rates).",
     "crumbs": [
-      "The Visual Link",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>The Pinhole Camera Model</span>"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>The Jacobian & Numerical Solvers</span>"
     ]
   },
   {
-    "objectID": "chapter2/2-2-3d-data.html",
-    "href": "chapter2/2-2-3d-data.html",
-    "title": "7  3D Data Representations",
-    "section": "",
-    "text": "Content for this section will be added here.",
+    "objectID": "01-spatial-mind/02-jacobian-solvers.html#numerical-inverse-kinematics-ik",
+    "href": "01-spatial-mind/02-jacobian-solvers.html#numerical-inverse-kinematics-ik",
+    "title": "3  The Jacobian & Numerical Solvers",
+    "section": "3.2 Numerical Inverse Kinematics (IK)",
+    "text": "3.2 Numerical Inverse Kinematics (IK)\n\nNewton-Raphson method.\nDamped Least Squares method.",
     "crumbs": [
-      "The Visual Link",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>3D Data Representations</span>"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>The Jacobian & Numerical Solvers</span>"
     ]
   },
   {
-    "objectID": "chapter2/2-3-hand-eye-calibration.html",
-    "href": "chapter2/2-3-hand-eye-calibration.html",
-    "title": "8  Hand-Eye Calibration",
-    "section": "",
-    "text": "Content for this section will be added here.",
+    "objectID": "01-spatial-mind/02-jacobian-solvers.html#singularities",
+    "href": "01-spatial-mind/02-jacobian-solvers.html#singularities",
+    "title": "3  The Jacobian & Numerical Solvers",
+    "section": "3.3 Singularities",
+    "text": "3.3 Singularities\n\nRank loss and infinite velocities.",
     "crumbs": [
-      "The Visual Link",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Hand-Eye Calibration</span>"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>The Jacobian & Numerical Solvers</span>"
     ]
   },
   {
-    "objectID": "chapter2/2-4-quiz.html",
-    "href": "chapter2/2-4-quiz.html",
-    "title": "9  Quiz",
+    "objectID": "01-spatial-mind/lab-01-stasis-loader.html",
+    "href": "01-spatial-mind/lab-01-stasis-loader.html",
+    "title": "4  Lab 1: The Stasis Loader",
     "section": "",
-    "text": "Quiz questions for Chapter 2 will be added here.",
+    "text": "4.1 Objective\nIntegrate Isaac Core with Lula Solver to manipulate a robotic arm.",
     "crumbs": [
-      "The Visual Link",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Quiz</span>"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lab 1: The Stasis Loader</span>"
     ]
   },
   {
-    "objectID": "chapter2/2-5-lab-intro.html",
-    "href": "chapter2/2-5-lab-intro.html",
-    "title": "10  Lab Introduction",
-    "section": "",
-    "text": "Lab introduction and instructions for Chapter 2 will be added here.",
+    "objectID": "01-spatial-mind/lab-01-stasis-loader.html#tasks",
+    "href": "01-spatial-mind/lab-01-stasis-loader.html#tasks",
+    "title": "4  Lab 1: The Stasis Loader",
+    "section": "4.2 Tasks",
+    "text": "4.2 Tasks\n\n4.2.1 1. Isaac Core & Lula Solver integration\n\n\n4.2.2 2. FK verification vs. Ground Truth\n\n\n4.2.3 3. Handling unreachable targets and singularities",
     "crumbs": [
-      "The Visual Link",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lab Introduction</span>"
+      "Part 1: The Spatial Mind (Kinematics & State)",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lab 1: The Stasis Loader</span>"
     ]
   },
   {
-    "objectID": "chapter3/index.html",
-    "href": "chapter3/index.html",
-    "title": "The Geometric Navigator",
+    "objectID": "02-visual-link/index.html",
+    "href": "02-visual-link/index.html",
+    "title": "5  The Visual Link (Active Perception)",
     "section": "",
-    "text": "This chapter explores path planning and trajectory generation techniques.",
+    "text": "5.1 Topics\nThis chapter focuses on how robots perceive the world through geometric vision and how we can bridge the gap between simulation and reality.",
     "crumbs": [
-      "The Geometric Navigator"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
-    "objectID": "chapter3/3-1-configuration-space.html",
-    "href": "chapter3/3-1-configuration-space.html",
-    "title": "11  Configuration Space (C-Space)",
+    "objectID": "02-visual-link/index.html#topics",
+    "href": "02-visual-link/index.html#topics",
+    "title": "5  The Visual Link (Active Perception)",
     "section": "",
-    "text": "Content for this section will be added here.",
+    "text": "The Geometry of Vision\nSynthetic Data & The Reality Gap\nLab: The Bio-Scanner",
     "crumbs": [
-      "The Geometric Navigator",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Configuration Space (C-Space)</span>"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
-    "objectID": "chapter3/3-2-planning-approaches.html",
-    "href": "chapter3/3-2-planning-approaches.html",
-    "title": "12  Modern Planning Approaches",
+    "objectID": "02-visual-link/01-geometry-of-vision.html",
+    "href": "02-visual-link/01-geometry-of-vision.html",
+    "title": "6  The Geometry of Vision",
     "section": "",
-    "text": "Content for this section will be added here.",
+    "text": "6.1 The Pinhole Camera Model",
     "crumbs": [
-      "The Geometric Navigator",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Modern Planning Approaches</span>"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>The Geometry of Vision</span>"
     ]
   },
   {
-    "objectID": "chapter3/3-3-trajectory-generation.html",
-    "href": "chapter3/3-3-trajectory-generation.html",
-    "title": "13  Trajectory Generation",
+    "objectID": "02-visual-link/01-geometry-of-vision.html#the-pinhole-camera-model",
+    "href": "02-visual-link/01-geometry-of-vision.html#the-pinhole-camera-model",
+    "title": "6  The Geometry of Vision",
     "section": "",
-    "text": "Content for this section will be added here.",
+    "text": "Intrinsic Matrix \\(K\\) and focal lengths.",
     "crumbs": [
-      "The Geometric Navigator",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Trajectory Generation</span>"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>The Geometry of Vision</span>"
     ]
   },
   {
-    "objectID": "chapter3/3-4-quiz.html",
-    "href": "chapter3/3-4-quiz.html",
-    "title": "14  Quiz",
-    "section": "",
-    "text": "Quiz questions for Chapter 3 will be added here.",
+    "objectID": "02-visual-link/01-geometry-of-vision.html#linear-algebra-of-deprojection",
+    "href": "02-visual-link/01-geometry-of-vision.html#linear-algebra-of-deprojection",
+    "title": "6  The Geometry of Vision",
+    "section": "6.2 Linear Algebra of Deprojection",
+    "text": "6.2 Linear Algebra of Deprojection\n\nConverting \\((u, v, d)\\) pixels to \\(P_{cam}\\).",
     "crumbs": [
-      "The Geometric Navigator",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Quiz</span>"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>The Geometry of Vision</span>"
     ]
   },
   {
-    "objectID": "chapter3/3-5-lab-intro.html",
-    "href": "chapter3/3-5-lab-intro.html",
-    "title": "15  Lab Introduction",
-    "section": "",
-    "text": "Lab introduction and instructions for Chapter 3 will be added here.",
+    "objectID": "02-visual-link/01-geometry-of-vision.html#extrinsic-transformations",
+    "href": "02-visual-link/01-geometry-of-vision.html#extrinsic-transformations",
+    "title": "6  The Geometry of Vision",
+    "section": "6.3 Extrinsic Transformations",
+    "text": "6.3 Extrinsic Transformations\n\nMapping Camera Frame to World Frame.",
     "crumbs": [
-      "The Geometric Navigator",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lab Introduction</span>"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>The Geometry of Vision</span>"
     ]
   },
   {
-    "objectID": "chapter4/index.html",
-    "href": "chapter4/index.html",
-    "title": "The Adaptive Learner",
+    "objectID": "02-visual-link/02-synthetic-data.html",
+    "href": "02-visual-link/02-synthetic-data.html",
+    "title": "7  Synthetic Data & The Reality Gap",
     "section": "",
-    "text": "This chapter covers reinforcement learning and sim-to-real transfer.",
+    "text": "7.1 The Reality Gap",
     "crumbs": [
-      "The Adaptive Learner"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Synthetic Data & The Reality Gap</span>"
     ]
   },
   {
-    "objectID": "chapter4/4-1-markov-decision.html",
-    "href": "chapter4/4-1-markov-decision.html",
-    "title": "16  The Markov Decision Process (MDP)",
+    "objectID": "02-visual-link/02-synthetic-data.html#the-reality-gap",
+    "href": "02-visual-link/02-synthetic-data.html#the-reality-gap",
+    "title": "7  Synthetic Data & The Reality Gap",
     "section": "",
-    "text": "Content for this section will be added here.",
+    "text": "Distribution shifts between sim and real.",
     "crumbs": [
-      "The Adaptive Learner",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>The Markov Decision Process (MDP)</span>"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Synthetic Data & The Reality Gap</span>"
     ]
   },
   {
-    "objectID": "chapter4/4-2-reward-engineering.html",
-    "href": "chapter4/4-2-reward-engineering.html",
-    "title": "17  Reward Engineering",
-    "section": "",
-    "text": "Content for this section will be added here.",
+    "objectID": "02-visual-link/02-synthetic-data.html#domain-randomization-dr-theory",
+    "href": "02-visual-link/02-synthetic-data.html#domain-randomization-dr-theory",
+    "title": "7  Synthetic Data & The Reality Gap",
+    "section": "7.2 Domain Randomization (DR) Theory",
+    "text": "7.2 Domain Randomization (DR) Theory\n\nLearning invariant features via randomized physics/rendering.",
     "crumbs": [
-      "The Adaptive Learner",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Reward Engineering</span>"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Synthetic Data & The Reality Gap</span>"
     ]
   },
   {
-    "objectID": "chapter4/4-3-reality-gap.html",
-    "href": "chapter4/4-3-reality-gap.html",
-    "title": "18  The Reality Gap (Sim2Real)",
+    "objectID": "02-visual-link/lab-02-bio-scanner.html",
+    "href": "02-visual-link/lab-02-bio-scanner.html",
+    "title": "8  Lab 2: The Bio-Scanner",
     "section": "",
-    "text": "Content for this section will be added here.",
+    "text": "8.1 Objective\nUse Isaac Replicator for synthetic data generation and implement visual servoing.",
     "crumbs": [
-      "The Adaptive Learner",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>The Reality Gap (Sim2Real)</span>"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lab 2: The Bio-Scanner</span>"
     ]
   },
   {
-    "objectID": "chapter4/4-4-quiz.html",
-    "href": "chapter4/4-4-quiz.html",
-    "title": "19  Quiz",
-    "section": "",
-    "text": "Quiz questions for Chapter 4 will be added here.",
+    "objectID": "02-visual-link/lab-02-bio-scanner.html#tasks",
+    "href": "02-visual-link/lab-02-bio-scanner.html#tasks",
+    "title": "8  Lab 2: The Bio-Scanner",
+    "section": "8.2 Tasks",
+    "text": "8.2 Tasks\n\n8.2.1 1. Isaac Replicator for synthetic data generation\n\n\n8.2.2 2. Implementing deproject_pixel_to_point() from scratch\n\n\n8.2.3 3. Visual servoing (centering the gripper over a target)",
     "crumbs": [
-      "The Adaptive Learner",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Quiz</span>"
+      "Part 2: The Visual Link (Active Perception)",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lab 2: The Bio-Scanner</span>"
     ]
   },
   {
-    "objectID": "chapter4/4-5-lab-intro.html",
-    "href": "chapter4/4-5-lab-intro.html",
-    "title": "20  Lab Introduction",
+    "objectID": "03-geometric-navigator/index.html",
+    "href": "03-geometric-navigator/index.html",
+    "title": "9  Introduction",
     "section": "",
-    "text": "Lab introduction and instructions for Chapter 4 will be added here.",
+    "text": "9.1 Topics\nThis chapter covers how robots plan motion through complex environments while maintaining safety and efficiency.",
     "crumbs": [
-      "The Adaptive Learner",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Lab Introduction</span>"
+      "Part 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/index.html#topics",
+    "href": "03-geometric-navigator/index.html#topics",
+    "title": "9  Introduction",
+    "section": "",
+    "text": "Configuration Space (C-Space)\nPlanning Paradigms\nDynamic Safety\nLab: The Core Insertion",
+    "crumbs": [
+      "Part 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/01-configuration-space.html",
+    "href": "03-geometric-navigator/01-configuration-space.html",
+    "title": "10  Configuration Space (C-Space)",
+    "section": "",
+    "text": "10.1 Topology",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Configuration Space (C-Space)</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/01-configuration-space.html#topology",
+    "href": "03-geometric-navigator/01-configuration-space.html#topology",
+    "title": "10  Configuration Space (C-Space)",
+    "section": "",
+    "text": "Visualizing the robot as a single particle in high-dimensional space.",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Configuration Space (C-Space)</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/01-configuration-space.html#obstacles-in-c-space",
+    "href": "03-geometric-navigator/01-configuration-space.html#obstacles-in-c-space",
+    "title": "10  Configuration Space (C-Space)",
+    "section": "10.2 Obstacles in C-Space",
+    "text": "10.2 Obstacles in C-Space",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Configuration Space (C-Space)</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/02-planning-paradigms.html",
+    "href": "03-geometric-navigator/02-planning-paradigms.html",
+    "title": "11  Planning Paradigms",
+    "section": "",
+    "text": "11.1 Sampling-based Planning",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Planning Paradigms</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/02-planning-paradigms.html#sampling-based-planning",
+    "href": "03-geometric-navigator/02-planning-paradigms.html#sampling-based-planning",
+    "title": "11  Planning Paradigms",
+    "section": "",
+    "text": "RRT and PRM (Probabilistic Completeness).",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Planning Paradigms</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/02-planning-paradigms.html#optimization-based-planning",
+    "href": "03-geometric-navigator/02-planning-paradigms.html#optimization-based-planning",
+    "title": "11  Planning Paradigms",
+    "section": "11.2 Optimization-based Planning",
+    "text": "11.2 Optimization-based Planning\n\nTrajectory Optimization (CuRobo/MPPI).\nCost Functions.",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Planning Paradigms</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/03-dynamic-safety.html",
+    "href": "03-geometric-navigator/03-dynamic-safety.html",
+    "title": "12  Dynamic Safety",
+    "section": "",
+    "text": "12.1 The Tunneling Effect",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dynamic Safety</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/03-dynamic-safety.html#the-tunneling-effect",
+    "href": "03-geometric-navigator/03-dynamic-safety.html#the-tunneling-effect",
+    "title": "12  Dynamic Safety",
+    "section": "",
+    "text": "Discrete time steps vs. continuous motion.",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dynamic Safety</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/03-dynamic-safety.html#continuous-collision-detection-ccd",
+    "href": "03-geometric-navigator/03-dynamic-safety.html#continuous-collision-detection-ccd",
+    "title": "12  Dynamic Safety",
+    "section": "12.2 Continuous Collision Detection (CCD)",
+    "text": "12.2 Continuous Collision Detection (CCD)\n\nSwept Volumes.",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dynamic Safety</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/lab-03-core-insertion.html",
+    "href": "03-geometric-navigator/lab-03-core-insertion.html",
+    "title": "13  Lab 3: The Core Insertion",
+    "section": "",
+    "text": "13.1 Objective\nConfigure CuRobo MotionGen and implement MPC for dynamic obstacle avoidance.",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lab 3: The Core Insertion</span>"
+    ]
+  },
+  {
+    "objectID": "03-geometric-navigator/lab-03-core-insertion.html#tasks",
+    "href": "03-geometric-navigator/lab-03-core-insertion.html#tasks",
+    "title": "13  Lab 3: The Core Insertion",
+    "section": "13.2 Tasks",
+    "text": "13.2 Tasks\n\n13.2.1 1. CuRobo MotionGen configuration\n\n\n13.2.2 2. Model Predictive Control (MPC) for dynamic obstacle avoidance\n\n\n13.2.3 3. Tuning weights for collision vs. smoothness",
+    "crumbs": [
+      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lab 3: The Core Insertion</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/index.html",
+    "href": "04-adaptive-learner/index.html",
+    "title": "14  The Adaptive Learner (Safe Reinforcement Learning)",
+    "section": "",
+    "text": "14.1 Topics\nThis chapter explores how robots can learn from experience and adapt to changing environments using Reinforcement Learning.",
+    "crumbs": [
+      "Part 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The Adaptive Learner (Safe Reinforcement Learning)</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/index.html#topics",
+    "href": "04-adaptive-learner/index.html#topics",
+    "title": "14  The Adaptive Learner (Safe Reinforcement Learning)",
+    "section": "",
+    "text": "The Markov Decision Process (MDP)\nSafety in RL\nSim-to-Real Transfer\nLab: The Mutagen Shaker",
+    "crumbs": [
+      "Part 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The Adaptive Learner (Safe Reinforcement Learning)</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/01-mdp.html",
+    "href": "04-adaptive-learner/01-mdp.html",
+    "title": "15  The Markov Decision Process (MDP)",
+    "section": "",
+    "text": "15.1 State Space Design",
+    "crumbs": [
+      "Part 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>The Markov Decision Process (MDP)</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/01-mdp.html#state-space-design",
+    "href": "04-adaptive-learner/01-mdp.html#state-space-design",
+    "title": "15  The Markov Decision Process (MDP)",
+    "section": "",
+    "text": "Proprioception vs. Privileged Information.",
+    "crumbs": [
+      "Part 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>The Markov Decision Process (MDP)</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/01-mdp.html#reward-engineering",
+    "href": "04-adaptive-learner/01-mdp.html#reward-engineering",
+    "title": "15  The Markov Decision Process (MDP)",
+    "section": "15.2 Reward Engineering",
+    "text": "15.2 Reward Engineering\n\nSparse vs. Dense rewards.\nReward shaping.",
+    "crumbs": [
+      "Part 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>The Markov Decision Process (MDP)</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/02-safety-in-rl.html",
+    "href": "04-adaptive-learner/02-safety-in-rl.html",
+    "title": "16  Safety in RL",
+    "section": "",
+    "text": "16.1 The Exploration-Safety Dilemma",
+    "crumbs": [
+      "Part 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Safety in RL</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/02-safety-in-rl.html#the-exploration-safety-dilemma",
+    "href": "04-adaptive-learner/02-safety-in-rl.html#the-exploration-safety-dilemma",
+    "title": "16  Safety in RL",
+    "section": "",
+    "text": "Maximizing reward while avoiding catastrophic failure.",
+    "crumbs": [
+      "Part 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Safety in RL</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/02-safety-in-rl.html#control-barrier-functions-cbf",
+    "href": "04-adaptive-learner/02-safety-in-rl.html#control-barrier-functions-cbf",
+    "title": "16  Safety in RL",
+    "section": "16.2 Control Barrier Functions (CBF)",
+    "text": "16.2 Control Barrier Functions (CBF)\n\nMathematical safety filters.",
+    "crumbs": [
+      "Part 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Safety in RL</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/03-sim-to-real.html",
+    "href": "04-adaptive-learner/03-sim-to-real.html",
+    "title": "17  Sim-to-Real Transfer",
+    "section": "",
+    "text": "17.1 Teacher-Student Distillation workflows",
+    "crumbs": [
+      "Chapter 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Sim-to-Real Transfer</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/03-sim-to-real.html#teacher-student-distillation-workflows",
+    "href": "04-adaptive-learner/03-sim-to-real.html#teacher-student-distillation-workflows",
+    "title": "17  Sim-to-Real Transfer",
+    "section": "",
+    "text": "Distilling privileged policy to sensor-based policy.",
+    "crumbs": [
+      "Chapter 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Sim-to-Real Transfer</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/03-sim-to-real.html#sensor-noise-modeling",
+    "href": "04-adaptive-learner/03-sim-to-real.html#sensor-noise-modeling",
+    "title": "17  Sim-to-Real Transfer",
+    "section": "17.2 Sensor noise modeling",
+    "text": "17.2 Sensor noise modeling\n\nMaking policies robust to real-world imperfections.",
+    "crumbs": [
+      "Chapter 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Sim-to-Real Transfer</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/lab-04-mutagen-shaker.html",
+    "href": "04-adaptive-learner/lab-04-mutagen-shaker.html",
+    "title": "18  Lab 4: The Mutagen Shaker",
+    "section": "",
+    "text": "18.1 Objective\nCreate an Isaac Lab Manager-based RL environment and demonstrate sim-to-real capabilities.",
+    "crumbs": [
+      "Chapter 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lab 4: The Mutagen Shaker</span>"
+    ]
+  },
+  {
+    "objectID": "04-adaptive-learner/lab-04-mutagen-shaker.html#tasks",
+    "href": "04-adaptive-learner/lab-04-mutagen-shaker.html#tasks",
+    "title": "18  Lab 4: The Mutagen Shaker",
+    "section": "18.2 Tasks",
+    "text": "18.2 Tasks\n\n18.2.1 1. Isaac Lab Manager-based RL environment\n\n\n18.2.2 2. Tracking dynamic/moving targets (sine wave command)\n\n\n18.2.3 3. Domain Randomization of physical mass",
+    "crumbs": [
+      "Chapter 4: The Adaptive Learner (Safe Reinforcement Learning)",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lab 4: The Mutagen Shaker</span>"
     ]
   }
 ]

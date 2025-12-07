@@ -1,0 +1,13 @@
+# Lab 4: The Mutagen Shaker
+
+## Objective
+
+Create an Isaac Lab Manager-based RL environment and demonstrate sim-to-real capabilities.
+
+## Tasks
+
+### 1. Isaac Lab Manager-based RL environment
+
+### 2. Tracking dynamic/moving targets (sine wave command)
+
+### 3. Domain Randomization of physical mass

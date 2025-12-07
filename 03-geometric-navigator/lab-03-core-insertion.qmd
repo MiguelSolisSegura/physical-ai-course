@@ -1,0 +1,13 @@
+# Lab 3: The Core Insertion
+
+## Objective
+
+Configure CuRobo MotionGen and implement MPC for dynamic obstacle avoidance.
+
+## Tasks
+
+### 1. CuRobo MotionGen configuration
+
+### 2. Model Predictive Control (MPC) for dynamic obstacle avoidance
+
+### 3. Tuning weights for collision vs. smoothness

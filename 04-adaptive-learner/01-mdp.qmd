@@ -1,0 +1,10 @@
+# The Markov Decision Process (MDP)
+
+## State Space Design
+
+- Proprioception vs. Privileged Information.
+
+## Reward Engineering
+
+- Sparse vs. Dense rewards.
+- Reward shaping.

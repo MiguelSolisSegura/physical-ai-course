@@ -1,0 +1,9 @@
+# Sim-to-Real Transfer
+
+## Teacher-Student Distillation workflows
+
+- Distilling privileged policy to sensor-based policy.
+
+## Sensor noise modeling
+
+- Making policies robust to real-world imperfections.

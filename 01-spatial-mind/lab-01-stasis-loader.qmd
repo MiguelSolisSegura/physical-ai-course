@@ -1,0 +1,13 @@
+# Lab 1: The Stasis Loader
+
+## Objective
+
+Integrate Isaac Core with Lula Solver to manipulate a robotic arm.
+
+## Tasks
+
+### 1. Isaac Core & Lula Solver integration
+
+### 2. FK verification vs. Ground Truth
+
+### 3. Handling unreachable targets and singularities

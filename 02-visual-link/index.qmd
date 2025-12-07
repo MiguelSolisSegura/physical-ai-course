@@ -1,0 +1,9 @@
+# Introduction
+
+This chapter focuses on how robots perceive the world through geometric vision and how we can bridge the gap between simulation and reality.
+
+## Topics
+
+- The Geometry of Vision
+- Synthetic Data & The Reality Gap
+- Lab: The Bio-Scanner

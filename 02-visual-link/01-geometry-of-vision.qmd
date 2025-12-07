@@ -1,0 +1,13 @@
+# The Geometry of Vision
+
+## The Pinhole Camera Model
+
+- Intrinsic Matrix $K$ and focal lengths.
+
+## Linear Algebra of Deprojection
+
+- Converting $(u, v, d)$ pixels to $P_{cam}$.
+
+## Extrinsic Transformations
+
+- Mapping Camera Frame to World Frame.

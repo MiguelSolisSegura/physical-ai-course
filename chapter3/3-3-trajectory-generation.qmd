@@ -1,3 +1,0 @@
-# Trajectory Generation
-
-Content for this section will be added here.

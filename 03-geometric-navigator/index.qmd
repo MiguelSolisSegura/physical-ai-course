@@ -1,0 +1,10 @@
+# Introduction
+
+This chapter covers how robots plan motion through complex environments while maintaining safety and efficiency.
+
+## Topics
+
+- Configuration Space (C-Space)
+- Planning Paradigms
+- Dynamic Safety
+- Lab: The Core Insertion

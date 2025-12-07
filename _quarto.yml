@@ -1,52 +1,41 @@
 project:
   type: book
-  output-dir: _book
 
 book:
   title: "Foundations of Physical AI"
-  author: "Miguel Solís Segura"
-  date: today
+  author: "Miguel Solis Segura"
+  date: "2025-12-04"
   chapters:
     - index.qmd
-    - part: chapter1/index.qmd
+    - part: "Part 1: The Spatial Mind (Kinematics & State)"
       chapters:
-        - chapter1/1-1-spatial-descriptions.qmd
-        - chapter1/1-2-kinematic-chain.qmd
-        - chapter1/1-3-degrees-of-freedom.qmd
-        - chapter1/1-4-quiz.qmd
-        - chapter1/1-5-lab-intro.qmd
-    - part: chapter2/index.qmd
+        - 01-spatial-mind/index.qmd
+        - 01-spatial-mind/01-rigid-body-mechanics.qmd
+        - 01-spatial-mind/02-jacobian-solvers.qmd
+        - 01-spatial-mind/lab-01-stasis-loader.qmd
+    - part: "Part 2: The Visual Link (Active Perception)"
       chapters:
-        - chapter2/2-1-pinhole-camera.qmd
-        - chapter2/2-2-3d-data.qmd
-        - chapter2/2-3-hand-eye-calibration.qmd
-        - chapter2/2-4-quiz.qmd
-        - chapter2/2-5-lab-intro.qmd
-    - part: chapter3/index.qmd
+        - 02-visual-link/index.qmd
+        - 02-visual-link/01-geometry-of-vision.qmd
+        - 02-visual-link/02-synthetic-data.qmd
+        - 02-visual-link/lab-02-bio-scanner.qmd
+    - part: "Part 3: The Geometric Navigator (Optimization-Based Planning)"
       chapters:
-        - chapter3/3-1-configuration-space.qmd
-        - chapter3/3-2-planning-approaches.qmd
-        - chapter3/3-3-trajectory-generation.qmd
-        - chapter3/3-4-quiz.qmd
-        - chapter3/3-5-lab-intro.qmd
-    - part: chapter4/index.qmd
+        - 03-geometric-navigator/index.qmd
+        - 03-geometric-navigator/01-configuration-space.qmd
+        - 03-geometric-navigator/02-planning-paradigms.qmd
+        - 03-geometric-navigator/03-dynamic-safety.qmd
+        - 03-geometric-navigator/lab-03-core-insertion.qmd
+    - part: "Part 4: The Adaptive Learner (Safe Reinforcement Learning)"
       chapters:
-        - chapter4/4-1-markov-decision.qmd
-        - chapter4/4-2-reward-engineering.qmd
-        - chapter4/4-3-reality-gap.qmd
-        - chapter4/4-4-quiz.qmd
-        - chapter4/4-5-lab-intro.qmd
-
-bibliography: references.bib
+        - 04-adaptive-learner/index.qmd
+        - 04-adaptive-learner/01-mdp.qmd
+        - 04-adaptive-learner/02-safety-in-rl.qmd
+        - 04-adaptive-learner/03-sim-to-real.qmd
+        - 04-adaptive-learner/lab-04-mutagen-shaker.qmd
 
 format:
   html:
-    theme: 
-      - cosmo
-      - vlexyan-theme.css
+    theme: vlexyan.scss
     toc: true
-    toc-depth: 2
-    number-depth: 2
-    css: vlexyan-theme.css
-    mainfont: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-    monofont: "'JetBrains Mono', 'Fira Code', monospace"
+    number-sections: true

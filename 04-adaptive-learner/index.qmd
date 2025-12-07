@@ -1,0 +1,10 @@
+# Introduction
+
+This chapter explores how robots can learn from experience and adapt to changing environments using Reinforcement Learning.
+
+## Topics
+
+- The Markov Decision Process (MDP)
+- Safety in RL
+- Sim-to-Real Transfer
+- Lab: The Mutagen Shaker

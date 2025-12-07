@@ -1,0 +1,13 @@
+# Lab 2: The Bio-Scanner
+
+## Objective
+
+Use Isaac Replicator for synthetic data generation and implement visual servoing.
+
+## Tasks
+
+### 1. Isaac Replicator for synthetic data generation
+
+### 2. Implementing `deproject_pixel_to_point()` from scratch
+
+### 3. Visual servoing (centering the gripper over a target)

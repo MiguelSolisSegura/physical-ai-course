@@ -1,3 +1,0 @@
-# The Visual Link {#sec-visual-link}
-
-This chapter covers vision systems and 3D perception for robotics.

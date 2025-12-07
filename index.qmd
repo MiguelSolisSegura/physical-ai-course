@@ -1,19 +1,12 @@
 # Welcome {.unnumbered}
 
-This is the course book for **Foundations of Physical AI**.
+Welcome to the **Foundations of Physical AI** course.
+
+This course explores the intersection of robotics, computer vision, and machine learning, focusing on how physical agents perceive, reason, and act in the world.
 
 ## Course Overview
 
-This course covers the fundamental concepts and techniques in physical AI systems, including:
-
-- **The Spatial Mind**: Understanding spatial representations and robotic kinematics
-- **The Visual Link**: Vision systems and 3D perception for robotics
-- **The Geometric Navigator**: Path planning and trajectory generation
-- **The Adaptive Learner**: Reinforcement learning and sim-to-real transfer
-
-## How to Use This Book
-
-Each chapter contains:
-- Conceptual topic sections
-- A quiz to test your understanding
-- A lab introduction to apply the concepts hands-on
+- **Chapter 1: The Spatial Mind**: Kinematics, rigid body mechanics, and numerical solvers.
+- **Chapter 2: The Visual Link**: Computer vision, camera models, and synthetic data.
+- **Chapter 3: The Geometric Navigator**: Motion planning, trajectory optimization, and collision avoidance.
+- **Chapter 4: The Adaptive Learner**: Reinforcement learning, safety, and sim-to-real transfer.

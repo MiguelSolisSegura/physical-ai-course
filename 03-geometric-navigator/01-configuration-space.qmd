@@ -1,0 +1,7 @@
+# Configuration Space (C-Space)
+
+## Topology
+
+- Visualizing the robot as a single particle in high-dimensional space.
+
+## Obstacles in C-Space
