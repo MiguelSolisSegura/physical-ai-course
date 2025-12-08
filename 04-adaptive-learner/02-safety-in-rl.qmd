@@ -1,9 +1,0 @@
-# Safety in RL
-
-## The Exploration-Safety Dilemma
-
-- Maximizing reward while avoiding catastrophic failure.
-
-## Control Barrier Functions (CBF)
-
-- Mathematical safety filters.

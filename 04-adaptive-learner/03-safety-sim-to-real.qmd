@@ -1,0 +1,12 @@
+# Safety & Sim-to-Real
+
+## The Exploration-Safety Dilemma
+
+- Maximizing reward while avoiding catastrophic failure.
+- Control Barrier Functions (CBF).
+
+## Sim-to-Real Transfer
+
+- Domain Randomization.
+- Teacher-Student Distillation.
+- Dealing with Noisy Sensors.

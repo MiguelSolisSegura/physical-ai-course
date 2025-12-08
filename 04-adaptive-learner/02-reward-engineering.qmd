@@ -1,0 +1,9 @@
+# Reward Engineering
+
+## Sparse vs. Dense Rewards
+
+- The credit assignment problem.
+
+## Reward Shaping
+
+- Curriculum learning and auxiliary tasks.

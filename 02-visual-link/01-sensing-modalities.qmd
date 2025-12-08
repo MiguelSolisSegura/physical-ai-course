@@ -1,0 +1,9 @@
+# Sensing Modalities
+
+## Proprioception
+
+- Encoders, IMUs, Torque sensors.
+
+## Exteroception
+
+- Cameras (RGB-D), LiDAR, Tactile sensing.

@@ -1,0 +1,10 @@
+# Robot Morphology & Topology
+
+## Joint Types
+
+- Prismatic, Revolute, Spherical.
+
+## Linkages and Graph Structure
+
+- Open chains vs. closed loops.
+- Tree-structured robots.

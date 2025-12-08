@@ -1,0 +1,9 @@
+# Optimization-Based Planning (Physical AI)
+
+## Trajectory Optimization
+
+- CuRobo, MPPI.
+
+## Cost Functions
+
+- Smoothness, Collision, Goal tracking.

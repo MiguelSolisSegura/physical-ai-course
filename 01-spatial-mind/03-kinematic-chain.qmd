@@ -1,4 +1,4 @@
-# The Jacobian & Numerical Solvers
+# The Kinematic Chain
 
 ## Differential Kinematics
 

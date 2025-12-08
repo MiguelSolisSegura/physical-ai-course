@@ -10,28 +10,30 @@ book:
     - part: "Part 1: The Spatial Mind (Kinematics & State)"
       chapters:
         - 01-spatial-mind/index.qmd
-        - 01-spatial-mind/01-rigid-body-mechanics.qmd
-        - 01-spatial-mind/02-jacobian-solvers.qmd
+        - 01-spatial-mind/01-robot-morphology.qmd
+        - 01-spatial-mind/02-describing-space.qmd
+        - 01-spatial-mind/03-kinematic-chain.qmd
         - 01-spatial-mind/lab-01-stasis-loader.qmd
     - part: "Part 2: The Visual Link (Active Perception)"
       chapters:
         - 02-visual-link/index.qmd
-        - 02-visual-link/01-geometry-of-vision.qmd
-        - 02-visual-link/02-synthetic-data.qmd
+        - 02-visual-link/01-sensing-modalities.qmd
+        - 02-visual-link/02-geometry-of-vision.qmd
+        - 02-visual-link/03-synthetic-data.qmd
         - 02-visual-link/lab-02-bio-scanner.qmd
-    - part: "Part 3: The Geometric Navigator (Optimization-Based Planning)"
+    - part: "Part 3: The Geometric Navigator (Motion Planning)"
       chapters:
         - 03-geometric-navigator/index.qmd
         - 03-geometric-navigator/01-configuration-space.qmd
-        - 03-geometric-navigator/02-planning-paradigms.qmd
-        - 03-geometric-navigator/03-dynamic-safety.qmd
+        - 03-geometric-navigator/02-classical-planning.qmd
+        - 03-geometric-navigator/03-optimization-planning.qmd
         - 03-geometric-navigator/lab-03-core-insertion.qmd
-    - part: "Part 4: The Adaptive Learner (Safe Reinforcement Learning)"
+    - part: "Part 4: The Adaptive Learner (Reinforcement Learning)"
       chapters:
         - 04-adaptive-learner/index.qmd
         - 04-adaptive-learner/01-mdp.qmd
-        - 04-adaptive-learner/02-safety-in-rl.qmd
-        - 04-adaptive-learner/03-sim-to-real.qmd
+        - 04-adaptive-learner/02-reward-engineering.qmd
+        - 04-adaptive-learner/03-safety-sim-to-real.qmd
         - 04-adaptive-learner/lab-04-mutagen-shaker.qmd
 
 format:

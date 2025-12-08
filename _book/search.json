@@ -345,7 +345,7 @@
     "section": "",
     "text": "11.1 Sampling-based Planning",
     "crumbs": [
-      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "Part 3: The Geometric Navigator (Optimization-Based Planning)",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Planning Paradigms</span>"
     ]
   },
@@ -356,7 +356,7 @@
     "section": "",
     "text": "RRT and PRM (Probabilistic Completeness).",
     "crumbs": [
-      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "Part 3: The Geometric Navigator (Optimization-Based Planning)",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Planning Paradigms</span>"
     ]
   },
@@ -367,7 +367,7 @@
     "section": "11.2 Optimization-based Planning",
     "text": "11.2 Optimization-based Planning\n\nTrajectory Optimization (CuRobo/MPPI).\nCost Functions.",
     "crumbs": [
-      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "Part 3: The Geometric Navigator (Optimization-Based Planning)",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Planning Paradigms</span>"
     ]
   },
@@ -378,7 +378,7 @@
     "section": "",
     "text": "12.1 The Tunneling Effect",
     "crumbs": [
-      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "Part 3: The Geometric Navigator (Optimization-Based Planning)",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dynamic Safety</span>"
     ]
   },
@@ -389,7 +389,7 @@
     "section": "",
     "text": "Discrete time steps vs. continuous motion.",
     "crumbs": [
-      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "Part 3: The Geometric Navigator (Optimization-Based Planning)",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dynamic Safety</span>"
     ]
   },
@@ -400,7 +400,7 @@
     "section": "12.2 Continuous Collision Detection (CCD)",
     "text": "12.2 Continuous Collision Detection (CCD)\n\nSwept Volumes.",
     "crumbs": [
-      "Chapter 3: The Geometric Navigator (Optimization-Based Planning)",
+      "Part 3: The Geometric Navigator (Optimization-Based Planning)",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dynamic Safety</span>"
     ]
   },

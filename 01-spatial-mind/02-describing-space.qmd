@@ -1,4 +1,4 @@
-# Modern Rigid Body Mechanics
+# Describing Space (SE3)
 
 ## The Special Euclidean Group $SE(3)$
 
