@@ -1,34 +1,38 @@
 project:
   type: book
 
+number-depth: 3
+
 book:
   title: "Foundations of Physical AI"
   author: "Miguel Solis Segura"
   date: "2025-12-04"
+  sidebar:
+    collapse-level: 1 
   chapters:
     - index.qmd
-    - part: "Part 1: The Spatial Mind (Kinematics & State)"
+    - part: "Part I: The Spatial Mind (Kinematics)"
       chapters:
         - 01-spatial-mind/index.qmd
         - 01-spatial-mind/01-robot-morphology.qmd
         - 01-spatial-mind/02-describing-space.qmd
         - 01-spatial-mind/03-kinematic-chain.qmd
         - 01-spatial-mind/lab-01-stasis-loader.qmd
-    - part: "Part 2: The Visual Link (Active Perception)"
+    - part: "Part II: The Visual Link (Active Perception)"
       chapters:
         - 02-visual-link/index.qmd
         - 02-visual-link/01-sensing-modalities.qmd
         - 02-visual-link/02-geometry-of-vision.qmd
         - 02-visual-link/03-synthetic-data.qmd
         - 02-visual-link/lab-02-bio-scanner.qmd
-    - part: "Part 3: The Geometric Navigator (Motion Planning)"
+    - part: "Part III: The Geometric Navigator (Motion Planning)"
       chapters:
         - 03-geometric-navigator/index.qmd
         - 03-geometric-navigator/01-configuration-space.qmd
         - 03-geometric-navigator/02-classical-planning.qmd
         - 03-geometric-navigator/03-optimization-planning.qmd
         - 03-geometric-navigator/lab-03-core-insertion.qmd
-    - part: "Part 4: The Adaptive Learner (Reinforcement Learning)"
+    - part: "Part IV: The Adaptive Learner (Reinforcement Learning)"
       chapters:
         - 04-adaptive-learner/index.qmd
         - 04-adaptive-learner/01-mdp.qmd
@@ -38,6 +42,7 @@ book:
 
 format:
   html:
-    theme: vlexyan.scss
+    theme: universal-robots.scss
     toc: true
     number-sections: true
+    page-layout: full

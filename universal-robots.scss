@@ -1,0 +1,140 @@
+/*-- scss:defaults --*/
+
+// Universal Robots Neon Palette
+$ur-blue-neon: #33C6F4; // Vibrant version of UR Blue
+$ur-grey-aluminum: #8F8F8F; // RAL 9007 approx
+$ur-dark-bg: #121212;
+$ur-panel-bg: #1E1E1E; // Slightly lighter for contrast
+$ur-alert-yellow: #FFD600;
+
+// Base
+$body-bg: $ur-dark-bg;
+$body-color: #F0F0F0;
+$link-color: $ur-blue-neon;
+$link-hover-color: lighten($ur-blue-neon, 15%);
+
+// Typography
+$font-family-sans-serif: "Roboto", system-ui, -apple-system, sans-serif; // UR often uses clean sans
+$headings-color: $ur-blue-neon;
+$headings-font-family: "Roboto", sans-serif;
+
+// Sidebar
+$sidebar-bg: $ur-panel-bg;
+$sidebar-fg: #D0D0D0;
+$sidebar-active-bg: rgba($ur-blue-neon, 0.15);
+$sidebar-active-fg: $ur-blue-neon;
+$sidebar-active-border: $ur-blue-neon;
+
+// Code
+$code-color: #A0D1E5;
+$code-bg: darken($ur-panel-bg, 3%);
+
+// Components
+$navbar-bg: $ur-dark-bg;
+$navbar-fg: $ur-blue-neon;
+$light: #F0F0F0;
+$dark: $ur-dark-bg;
+$primary: $ur-blue-neon;
+$secondary: $ur-grey-aluminum;
+
+/*-- scss:rules --*/
+
+// Industrial / Neon Aesthetics
+.sidebar-title {
+    color: $ur-blue-neon !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid $ur-grey-aluminum;
+    padding-bottom: 10px;
+}
+
+// Neon Glow for headers
+h1,
+h2,
+h3,
+h4 {
+    text-shadow: 0 0 8px rgba($ur-blue-neon, 0.4);
+}
+
+// Sharp edges for technical feel
+.callout,
+.card,
+pre {
+    border-radius: 2px;
+    border: 1px solid rgba($ur-grey-aluminum, 0.3);
+}
+
+// Active sidebar item - technical marker
+.sidebar-item-active>a {
+    border-left: 4px solid $ur-blue-neon;
+    padding-left: 0.7rem;
+    background: linear-gradient(90deg, rgba($ur-blue-neon, 0.1) 0%, transparent 100%);
+}
+
+// Scrollbar - Metallic
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: $ur-dark-bg;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $ur-grey-aluminum;
+    border: 2px solid $ur-dark-bg;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $ur-blue-neon;
+}
+
+// OJS Input Range Sliders
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-track {
+    background: $ur-grey-aluminum;
+    height: 4px;
+    border-radius: 2px;
+}
+
+input[type="range"]::-moz-range-track {
+    background: $ur-grey-aluminum;
+    height: 4px;
+    border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: $ur-blue-neon;
+    border-radius: 50%;
+    border: 2px solid $ur-dark-bg;
+    box-shadow: 0 0 8px rgba($ur-blue-neon, 0.4);
+    margin-top: -6px;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: $ur-blue-neon;
+    border-radius: 50%;
+    border: 2px solid $ur-dark-bg;
+    box-shadow: 0 0 8px rgba($ur-blue-neon, 0.4);
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 12px rgba($ur-blue-neon, 0.6);
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+    box-shadow: 0 0 12px rgba($ur-blue-neon, 0.6);
+}

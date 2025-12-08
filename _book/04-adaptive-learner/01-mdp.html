@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>15&nbsp; The Markov Decision Process (MDP) – Foundations of Physical AI</title>
+<title>17&nbsp; The Markov Decision Process (MDP) – Foundations of Physical AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../04-adaptive-learner/02-safety-in-rl.html" rel="next">
+<link href="../04-adaptive-learner/02-reward-engineering.html" rel="next">
 <link href="../04-adaptive-learner/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -71,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-adaptive-learner/index.html">Part 4: The Adaptive Learner (Safe Reinforcement Learning)</a></li><li class="breadcrumb-item"><a href="../04-adaptive-learner/01-mdp.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The Markov Decision Process (MDP)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-adaptive-learner/index.html">Part 4: The Adaptive Learner (Reinforcement Learning)</a></li><li class="breadcrumb-item"><a href="../04-adaptive-learner/01-mdp.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">The Markov Decision Process (MDP)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -131,20 +160,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-spatial-mind/01-rigid-body-mechanics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Modern Rigid Body Mechanics</span></span></a>
+  <a href="../01-spatial-mind/01-robot-morphology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Robot Morphology &amp; Topology</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-spatial-mind/02-jacobian-solvers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Jacobian &amp; Numerical Solvers</span></span></a>
+  <a href="../01-spatial-mind/02-describing-space.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Describing Space (SE3)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-spatial-mind/03-kinematic-chain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Kinematic Chain</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01-spatial-mind/lab-01-stasis-loader.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lab 1: The Stasis Loader</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1: The Stasis Loader</span></span></a>
   </div>
 </li>
       </ul>
@@ -161,25 +196,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-visual-link/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../02-visual-link/01-geometry-of-vision.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">The Geometry of Vision</span></span></a>
+  <a href="../02-visual-link/01-sensing-modalities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sensing Modalities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../02-visual-link/02-synthetic-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synthetic Data &amp; The Reality Gap</span></span></a>
+  <a href="../02-visual-link/02-geometry-of-vision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The Geometry of Vision</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-visual-link/03-synthetic-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Synthetic Data &amp; The Reality Gap</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-visual-link/lab-02-bio-scanner.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 2: The Bio-Scanner</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 2: The Bio-Scanner</span></span></a>
   </div>
 </li>
       </ul>
@@ -187,7 +228,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Part 3: The Geometric Navigator (Optimization-Based Planning)</span></a>
+ <span class="menu-text">Part 3: The Geometric Navigator (Motion Planning)</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -196,31 +237,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-geometric-navigator/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-geometric-navigator/01-configuration-space.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Configuration Space (C-Space)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Configuration Space (C-Space)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-geometric-navigator/02-planning-paradigms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Planning Paradigms</span></span></a>
+  <a href="../03-geometric-navigator/02-classical-planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Classical Planning (Sampling)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-geometric-navigator/03-dynamic-safety.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dynamic Safety</span></span></a>
+  <a href="../03-geometric-navigator/03-optimization-planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimization-Based Planning (Physical AI)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-geometric-navigator/lab-03-core-insertion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lab 3: The Core Insertion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lab 3: The Core Insertion</span></span></a>
   </div>
 </li>
       </ul>
@@ -228,7 +269,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Part 4: The Adaptive Learner (Safe Reinforcement Learning)</span></a>
+ <span class="menu-text">Part 4: The Adaptive Learner (Reinforcement Learning)</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -237,31 +278,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-adaptive-learner/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-adaptive-learner/01-mdp.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The Markov Decision Process (MDP)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">The Markov Decision Process (MDP)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../04-adaptive-learner/02-safety-in-rl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Safety in RL</span></span></a>
+  <a href="../04-adaptive-learner/02-reward-engineering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reward Engineering</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../04-adaptive-learner/03-sim-to-real.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sim-to-Real Transfer</span></span></a>
+  <a href="../04-adaptive-learner/03-safety-sim-to-real.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Safety &amp; Sim-to-Real</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-adaptive-learner/lab-04-mutagen-shaker.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Lab 4: The Mutagen Shaker</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Lab 4: The Mutagen Shaker</span></span></a>
   </div>
 </li>
       </ul>
@@ -276,17 +317,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#state-space-design" id="toc-state-space-design" class="nav-link active" data-scroll-target="#state-space-design"><span class="header-section-number">15.1</span> State Space Design</a></li>
-  <li><a href="#reward-engineering" id="toc-reward-engineering" class="nav-link" data-scroll-target="#reward-engineering"><span class="header-section-number">15.2</span> Reward Engineering</a></li>
+  <li><a href="#state-space-s" id="toc-state-space-s" class="nav-link active" data-scroll-target="#state-space-s"><span class="header-section-number">17.1</span> State Space (<span class="math inline">\(S\)</span>)</a></li>
+  <li><a href="#action-space-a" id="toc-action-space-a" class="nav-link" data-scroll-target="#action-space-a"><span class="header-section-number">17.2</span> Action Space (<span class="math inline">\(A\)</span>)</a></li>
+  <li><a href="#transition-function-p-and-discount-factor-gamma" id="toc-transition-function-p-and-discount-factor-gamma" class="nav-link" data-scroll-target="#transition-function-p-and-discount-factor-gamma"><span class="header-section-number">17.3</span> Transition Function (<span class="math inline">\(P\)</span>) and Discount Factor (<span class="math inline">\(\gamma\)</span>)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-adaptive-learner/index.html">Part 4: The Adaptive Learner (Safe Reinforcement Learning)</a></li><li class="breadcrumb-item"><a href="../04-adaptive-learner/01-mdp.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The Markov Decision Process (MDP)</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-adaptive-learner/index.html">Part 4: The Adaptive Learner (Reinforcement Learning)</a></li><li class="breadcrumb-item"><a href="../04-adaptive-learner/01-mdp.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">The Markov Decision Process (MDP)</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The Markov Decision Process (MDP)</span></h1>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">The Markov Decision Process (MDP)</span></h1>
 </div>
 
 
@@ -303,18 +345,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="state-space-design" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="state-space-design"><span class="header-section-number">15.1</span> State Space Design</h2>
+<section id="state-space-s" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="state-space-s"><span class="header-section-number">17.1</span> State Space (<span class="math inline">\(S\)</span>)</h2>
 <ul>
 <li>Proprioception vs.&nbsp;Privileged Information.</li>
 </ul>
 </section>
-<section id="reward-engineering" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="reward-engineering"><span class="header-section-number">15.2</span> Reward Engineering</h2>
-<ul>
-<li>Sparse vs.&nbsp;Dense rewards.</li>
-<li>Reward shaping.</li>
-</ul>
+<section id="action-space-a" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="action-space-a"><span class="header-section-number">17.2</span> Action Space (<span class="math inline">\(A\)</span>)</h2>
+</section>
+<section id="transition-function-p-and-discount-factor-gamma" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="transition-function-p-and-discount-factor-gamma"><span class="header-section-number">17.3</span> Transition Function (<span class="math inline">\(P\)</span>) and Discount Factor (<span class="math inline">\(\gamma\)</span>)</h2>
 
 
 </section>
@@ -723,12 +764,12 @@ ul.task-list li input[type="checkbox"] {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../04-adaptive-learner/index.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../04-adaptive-learner/02-safety-in-rl.html" class="pagination-link" aria-label="Safety in RL">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Safety in RL</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../04-adaptive-learner/02-reward-engineering.html" class="pagination-link" aria-label="Reward Engineering">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reward Engineering</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

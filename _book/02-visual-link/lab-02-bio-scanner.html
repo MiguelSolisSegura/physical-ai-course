@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Lab 2: The Bio-Scanner – Foundations of Physical AI</title>
+<title>10&nbsp; Lab 2: The Bio-Scanner – Foundations of Physical AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../03-geometric-navigator/index.html" rel="next">
-<link href="../02-visual-link/02-synthetic-data.html" rel="prev">
+<link href="../02-visual-link/03-synthetic-data.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -39,10 +39,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-b1ab6ac0561c80121ad0fdec0a3b1b6c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-15c0570ae09c2663d52c7141c4c7d0da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-visual-link/index.html">Part 2: The Visual Link (Active Perception)</a></li><li class="breadcrumb-item"><a href="../02-visual-link/lab-02-bio-scanner.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 2: The Bio-Scanner</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-visual-link/index.html">Part 2: The Visual Link (Active Perception)</a></li><li class="breadcrumb-item"><a href="../02-visual-link/lab-02-bio-scanner.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 2: The Bio-Scanner</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -131,20 +131,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-spatial-mind/01-rigid-body-mechanics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Modern Rigid Body Mechanics</span></span></a>
+  <a href="../01-spatial-mind/01-robot-morphology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Robot Morphology &amp; Topology</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-spatial-mind/02-jacobian-solvers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Jacobian &amp; Numerical Solvers</span></span></a>
+  <a href="../01-spatial-mind/02-describing-space.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Describing Space (SE3)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-spatial-mind/03-kinematic-chain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Kinematic Chain</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01-spatial-mind/lab-01-stasis-loader.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lab 1: The Stasis Loader</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1: The Stasis Loader</span></span></a>
   </div>
 </li>
       </ul>
@@ -161,25 +167,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-visual-link/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../02-visual-link/01-geometry-of-vision.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">The Geometry of Vision</span></span></a>
+  <a href="../02-visual-link/01-sensing-modalities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sensing Modalities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../02-visual-link/02-synthetic-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synthetic Data &amp; The Reality Gap</span></span></a>
+  <a href="../02-visual-link/02-geometry-of-vision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The Geometry of Vision</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-visual-link/03-synthetic-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Synthetic Data &amp; The Reality Gap</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-visual-link/lab-02-bio-scanner.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 2: The Bio-Scanner</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 2: The Bio-Scanner</span></span></a>
   </div>
 </li>
       </ul>
@@ -187,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Part 3: The Geometric Navigator (Optimization-Based Planning)</span></a>
+ <span class="menu-text">Part 3: The Geometric Navigator (Motion Planning)</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -196,31 +208,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-geometric-navigator/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-geometric-navigator/01-configuration-space.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Configuration Space (C-Space)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Configuration Space (C-Space)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-geometric-navigator/02-planning-paradigms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Planning Paradigms</span></span></a>
+  <a href="../03-geometric-navigator/02-classical-planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Classical Planning (Sampling)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-geometric-navigator/03-dynamic-safety.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dynamic Safety</span></span></a>
+  <a href="../03-geometric-navigator/03-optimization-planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimization-Based Planning (Physical AI)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-geometric-navigator/lab-03-core-insertion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lab 3: The Core Insertion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lab 3: The Core Insertion</span></span></a>
   </div>
 </li>
       </ul>
@@ -228,7 +240,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Part 4: The Adaptive Learner (Safe Reinforcement Learning)</span></a>
+ <span class="menu-text">Part 4: The Adaptive Learner (Reinforcement Learning)</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -237,31 +249,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-adaptive-learner/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-adaptive-learner/01-mdp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The Markov Decision Process (MDP)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">The Markov Decision Process (MDP)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../04-adaptive-learner/02-safety-in-rl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Safety in RL</span></span></a>
+  <a href="../04-adaptive-learner/02-reward-engineering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reward Engineering</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../04-adaptive-learner/03-sim-to-real.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sim-to-Real Transfer</span></span></a>
+  <a href="../04-adaptive-learner/03-safety-sim-to-real.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Safety &amp; Sim-to-Real</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-adaptive-learner/lab-04-mutagen-shaker.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Lab 4: The Mutagen Shaker</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Lab 4: The Mutagen Shaker</span></span></a>
   </div>
 </li>
       </ul>
@@ -276,12 +288,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#objective" id="toc-objective" class="nav-link active" data-scroll-target="#objective"><span class="header-section-number">8.1</span> Objective</a></li>
-  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks"><span class="header-section-number">8.2</span> Tasks</a>
+  <li><a href="#objective" id="toc-objective" class="nav-link active" data-scroll-target="#objective"><span class="header-section-number">10.1</span> Objective</a></li>
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks"><span class="header-section-number">10.2</span> Tasks</a>
   <ul class="collapse">
-  <li><a href="#isaac-replicator-for-synthetic-data-generation" id="toc-isaac-replicator-for-synthetic-data-generation" class="nav-link" data-scroll-target="#isaac-replicator-for-synthetic-data-generation"><span class="header-section-number">8.2.1</span> 1. Isaac Replicator for synthetic data generation</a></li>
-  <li><a href="#implementing-deproject_pixel_to_point-from-scratch" id="toc-implementing-deproject_pixel_to_point-from-scratch" class="nav-link" data-scroll-target="#implementing-deproject_pixel_to_point-from-scratch"><span class="header-section-number">8.2.2</span> 2. Implementing <code>deproject_pixel_to_point()</code> from scratch</a></li>
-  <li><a href="#visual-servoing-centering-the-gripper-over-a-target" id="toc-visual-servoing-centering-the-gripper-over-a-target" class="nav-link" data-scroll-target="#visual-servoing-centering-the-gripper-over-a-target"><span class="header-section-number">8.2.3</span> 3. Visual servoing (centering the gripper over a target)</a></li>
+  <li><a href="#isaac-replicator-for-synthetic-data-generation" id="toc-isaac-replicator-for-synthetic-data-generation" class="nav-link" data-scroll-target="#isaac-replicator-for-synthetic-data-generation"><span class="header-section-number">10.2.1</span> 1. Isaac Replicator for synthetic data generation</a></li>
+  <li><a href="#implementing-deproject_pixel_to_point-from-scratch" id="toc-implementing-deproject_pixel_to_point-from-scratch" class="nav-link" data-scroll-target="#implementing-deproject_pixel_to_point-from-scratch"><span class="header-section-number">10.2.2</span> 2. Implementing <code>deproject_pixel_to_point()</code> from scratch</a></li>
+  <li><a href="#visual-servoing-centering-the-gripper-over-a-target" id="toc-visual-servoing-centering-the-gripper-over-a-target" class="nav-link" data-scroll-target="#visual-servoing-centering-the-gripper-over-a-target"><span class="header-section-number">10.2.3</span> 3. Visual servoing (centering the gripper over a target)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -289,9 +301,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-visual-link/index.html">Part 2: The Visual Link (Active Perception)</a></li><li class="breadcrumb-item"><a href="../02-visual-link/lab-02-bio-scanner.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 2: The Bio-Scanner</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-visual-link/index.html">Part 2: The Visual Link (Active Perception)</a></li><li class="breadcrumb-item"><a href="../02-visual-link/lab-02-bio-scanner.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 2: The Bio-Scanner</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 2: The Bio-Scanner</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 2: The Bio-Scanner</span></h1>
 </div>
 
 
@@ -308,20 +320,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="objective" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="objective"><span class="header-section-number">8.1</span> Objective</h2>
+<section id="objective" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="objective"><span class="header-section-number">10.1</span> Objective</h2>
 <p>Use Isaac Replicator for synthetic data generation and implement visual servoing.</p>
 </section>
-<section id="tasks" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="tasks"><span class="header-section-number">8.2</span> Tasks</h2>
-<section id="isaac-replicator-for-synthetic-data-generation" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="isaac-replicator-for-synthetic-data-generation"><span class="header-section-number">8.2.1</span> 1. Isaac Replicator for synthetic data generation</h3>
+<section id="tasks" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="tasks"><span class="header-section-number">10.2</span> Tasks</h2>
+<section id="isaac-replicator-for-synthetic-data-generation" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="isaac-replicator-for-synthetic-data-generation"><span class="header-section-number">10.2.1</span> 1. Isaac Replicator for synthetic data generation</h3>
 </section>
-<section id="implementing-deproject_pixel_to_point-from-scratch" class="level3" data-number="8.2.2">
-<h3 data-number="8.2.2" class="anchored" data-anchor-id="implementing-deproject_pixel_to_point-from-scratch"><span class="header-section-number">8.2.2</span> 2. Implementing <code>deproject_pixel_to_point()</code> from scratch</h3>
+<section id="implementing-deproject_pixel_to_point-from-scratch" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="implementing-deproject_pixel_to_point-from-scratch"><span class="header-section-number">10.2.2</span> 2. Implementing <code>deproject_pixel_to_point()</code> from scratch</h3>
 </section>
-<section id="visual-servoing-centering-the-gripper-over-a-target" class="level3" data-number="8.2.3">
-<h3 data-number="8.2.3" class="anchored" data-anchor-id="visual-servoing-centering-the-gripper-over-a-target"><span class="header-section-number">8.2.3</span> 3. Visual servoing (centering the gripper over a target)</h3>
+<section id="visual-servoing-centering-the-gripper-over-a-target" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="visual-servoing-centering-the-gripper-over-a-target"><span class="header-section-number">10.2.3</span> 3. Visual servoing (centering the gripper over a target)</h3>
 
 
 </section>
@@ -730,13 +742,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../02-visual-link/02-synthetic-data.html" class="pagination-link" aria-label="Synthetic Data &amp; The Reality Gap">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synthetic Data &amp; The Reality Gap</span></span>
+      <a href="../02-visual-link/03-synthetic-data.html" class="pagination-link" aria-label="Synthetic Data &amp; The Reality Gap">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Synthetic Data &amp; The Reality Gap</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../03-geometric-navigator/index.html" class="pagination-link" aria-label="Introduction">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Introduction – Foundations of Physical AI</title>
+<title>3&nbsp; Describing Space (SE3) – Foundations of Physical AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../01-spatial-mind/01-robot-morphology.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../01-spatial-mind/03-kinematic-chain.html" rel="next">
+<link href="../01-spatial-mind/01-robot-morphology.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-81f38a91da655caa719a48fb693beec9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-cdc1deec1a2a59687a803d9530c4bcd9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,7 +112,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-spatial-mind/index.html">Part I: The Spatial Mind (Kinematics)</a></li><li class="breadcrumb-item"><a href="../01-spatial-mind/index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-spatial-mind/index.html">Part I: The Spatial Mind (Kinematics)</a></li><li class="breadcrumb-item"><a href="../01-spatial-mind/02-describing-space.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Describing Space (SE3)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -154,7 +154,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-spatial-mind/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../01-spatial-mind/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -166,7 +166,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-spatial-mind/02-describing-space.html" class="sidebar-item-text sidebar-link">
+  <a href="../01-spatial-mind/02-describing-space.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Describing Space (SE3)</span></span></a>
   </div>
 </li>
@@ -317,16 +317,19 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#topics" id="toc-topics" class="nav-link active" data-scroll-target="#topics"><span class="header-section-number">1.1</span> Topics</a></li>
+  <li><a href="#the-special-euclidean-group-se3" id="toc-the-special-euclidean-group-se3" class="nav-link active" data-scroll-target="#the-special-euclidean-group-se3"><span class="header-section-number">3.1</span> The Special Euclidean Group <span class="math inline">\(SE(3)\)</span></a></li>
+  <li><a href="#screw-theory" id="toc-screw-theory" class="nav-link" data-scroll-target="#screw-theory"><span class="header-section-number">3.2</span> Screw Theory</a></li>
+  <li><a href="#the-product-of-exponentials-poe-formula" id="toc-the-product-of-exponentials-poe-formula" class="nav-link" data-scroll-target="#the-product-of-exponentials-poe-formula"><span class="header-section-number">3.3</span> The Product of Exponentials (PoE) Formula</a></li>
+  <li><a href="#homogeneous-transformation-matrices" id="toc-homogeneous-transformation-matrices" class="nav-link" data-scroll-target="#homogeneous-transformation-matrices"><span class="header-section-number">3.4</span> Homogeneous Transformation Matrices</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content column-body" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-spatial-mind/index.html">Part I: The Spatial Mind (Kinematics)</a></li><li class="breadcrumb-item"><a href="../01-spatial-mind/index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-spatial-mind/index.html">Part I: The Spatial Mind (Kinematics)</a></li><li class="breadcrumb-item"><a href="../01-spatial-mind/02-describing-space.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Describing Space (SE3)</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Describing Space (SE3)</span></h1>
 </div>
 
 
@@ -343,14 +346,26 @@ window.Quarto = {
 </header>
 
 
-<p>This chapter lays the mathematical foundation for describing robot motion and configuration in 3D space.</p>
-<section id="topics" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="topics"><span class="header-section-number">1.1</span> Topics</h2>
+<section id="the-special-euclidean-group-se3" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="the-special-euclidean-group-se3"><span class="header-section-number">3.1</span> The Special Euclidean Group <span class="math inline">\(SE(3)\)</span></h2>
 <ul>
-<li>Modern Rigid Body Mechanics (<span class="math inline">\(SE(3)\)</span>)</li>
-<li>Differential Kinematics &amp; Numerical Solvers</li>
-<li>Lab: The Stasis Loader</li>
+<li>Rotation Matrices vs.&nbsp;Unit Quaternions.</li>
 </ul>
+</section>
+<section id="screw-theory" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="screw-theory"><span class="header-section-number">3.2</span> Screw Theory</h2>
+<ul>
+<li>Representing joints as screw axes <span class="math inline">\(\mathcal{S}\)</span>.</li>
+</ul>
+</section>
+<section id="the-product-of-exponentials-poe-formula" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="the-product-of-exponentials-poe-formula"><span class="header-section-number">3.3</span> The Product of Exponentials (PoE) Formula</h2>
+<ul>
+<li>The modern alternative to Denavit-Hartenberg.</li>
+</ul>
+</section>
+<section id="homogeneous-transformation-matrices" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="homogeneous-transformation-matrices"><span class="header-section-number">3.4</span> Homogeneous Transformation Matrices</h2>
 
 
 </section>
@@ -758,13 +773,13 @@ window.Quarto = {
   </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Welcome">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
+      <a href="../01-spatial-mind/01-robot-morphology.html" class="pagination-link" aria-label="Robot Morphology &amp; Topology">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Robot Morphology &amp; Topology</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../01-spatial-mind/01-robot-morphology.html" class="pagination-link" aria-label="Robot Morphology &amp; Topology">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Robot Morphology &amp; Topology</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../01-spatial-mind/03-kinematic-chain.html" class="pagination-link" aria-label="The Kinematic Chain">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Kinematic Chain</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

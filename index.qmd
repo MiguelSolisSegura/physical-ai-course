@@ -1,12 +1,16 @@
 # Welcome {.unnumbered}
 
-Welcome to the **Foundations of Physical AI** course.
-
-This course explores the intersection of robotics, computer vision, and machine learning, focusing on how physical agents perceive, reason, and act in the world.
+*Three years after The Great Cleansing, the Vlexyans stood at the threshold of a new era. Scarred by the consequences of their own creations, they had vowed never to repeat the mistakes of the past. This time, they would rebuild not with their own technology, but with that of outsiders.
+In the realm of Embodied AI, human innovation offered a compelling solution. It was advanced enough to yield meaningful progress, yet primitive enough to be safely adapted and improved upon. Vlexyans saw in it a chance to restore their society without awakening the dangers that once brought it to ruin.
+And so, they summoned a human engineer, an emissary of a distant world, to lead the reconstruction of their critical infrastructure. With cautious optimism and the wisdom of hard-earned lessons, the Vlexyans began to shape a future where technology would serve, not dominate.*
 
 ## Course Overview
 
-- **Chapter 1: The Spatial Mind**: Kinematics, rigid body mechanics, and numerical solvers.
-- **Chapter 2: The Visual Link**: Computer vision, camera models, and synthetic data.
-- **Chapter 3: The Geometric Navigator**: Motion planning, trajectory optimization, and collision avoidance.
-- **Chapter 4: The Adaptive Learner**: Reinforcement learning, safety, and sim-to-real transfer.
+Welcome to **Foundations of Physical AI**.
+
+This learning experience explores introductory topics in the intersection of robotics, computer vision, and machine learning, focusing on how physical agents perceive, reason, and act in the world.
+
+- **Part 1: The Spatial Mind**: Kinematics, rigid body mechanics, and numerical solvers.
+- **Part 2: The Visual Link**: Computer vision, camera models, and synthetic data.
+- **Part 3: The Geometric Navigator**: Motion planning, trajectory optimization, and collision avoidance.
+- **Part 4: The Adaptive Learner**: Reinforcement learning, safety, and sim-to-real transfer.
