@@ -88,110 +88,659 @@ html`
 
 
 
-This six-dimensional space is often referred to as the "Task Space" or "Operational Space" when discussing the end-effector. We mathematically describe this space as the Special Euclidean Group, $SE(3)$, a manifold we will analyze in depth in Section 6.
+This six-dimensional space is often referred to as the *Task Space* or *Operational Space* when discussing the end-effector. We mathematically describe this space as the Special Euclidean Group, $SE(3)$, a manifold we will analyze in depth in @sec-se3.
 
 In planar robotics (robots confined to a 2D surface), a rigid body has only 3 DoF: translation in X and Y, and rotation about the Z-axis (perpendicular to the plane). While Universal Robots are spatial 3D manipulators, understanding the planar case is often useful for simplifying problems or analyzing mobile bases.
-2.3 Reference Frames and Transformations
-To operationalize the rigid body assumption, we affix a coordinate system, or frame, to each link. The morphology of the robot is essentially a description of how these frames are permanently related to one another. For a Universal Robot, we typically place the base frame $\{0\}$ at the center of the base mounting plate. Frame $\{1\}$ is attached to the shoulder, Frame $\{2\}$ to the upper arm, and so on, up to the end-effector frame $\{6\}$ at the tool flange.7
-The "shape" of the robot is mathematically encoded in the static transformations between these frames when the joints are at their zero positions. For instance, the length of the Upper Arm link is the distance between the $z$-axis of the Shoulder joint and the $z$-axis of the Elbow joint. In the UR specification, these lengths are precise kinematic parameters (e.g., the Upper Arm length of a UR5 is 425mm). These parameters constitute the static morphology.
-3. The Mechanics of Connectivity: Kinematic Pairs
-If a robot consisted only of unconnected rigid bodies, it would be a "flock" rather than a mechanism.8 The bodies must be constrained relative to one another to transmit force and motion. The connection between two rigid bodies is called a joint, or in classical mechanics, a kinematic pair.1
-Joints function by removing degrees of freedom. By connecting two bodies, a joint imposes constraints that prevent certain relative motions while permitting others. The number of independent motions permitted by the joint is its specific degree of freedom, denoted as $f$.
-3.1 Lower Pairs
-The most common joints in robotics are called "Lower Pairs," characterized by surface contact between the two moving bodies. This surface contact distributes loads effectively, making them durable and suitable for industrial applications like the Universal Robots.4
-The Revolute Joint (R)
-The revolute joint is the fundamental building block of articulated arms. It allows pure rotation about a single axis while preventing all translation and all rotation about orthogonal axes.1
 
-DoF ($f$): 1 (Rotation $\theta$).
-Constraints ($c$): 5 (3 translations + 2 rotations).
-Example: Every joint in a Universal Robot (Base, Shoulder, Elbow, Wrist 1, 2, 3) is a revolute joint.2 This ubiquity simplifies the kinematics, as all variables are angles.
-The Prismatic Joint (P)
+### Reference Frames and Transformations
+To operationalize the rigid body assumption, we affix a coordinate system, or frame, to each link. The morphology of the robot is essentially a description of how these frames are permanently related to one another. For a Universal Robot, we typically place the base frame $\{0\}$ at the center of the base mounting plate. Frame $\{1\}$ is attached to the shoulder, Frame $\{2\}$ to the upper arm, and so on, up to the end-effector frame $\{6\}$ at the tool flange.
+
+The *shape* of the robot is mathematically encoded in the static transformations between these frames when the joints are at their zero positions. For instance, the length of the Upper Arm link is the distance between the $z$-axis of the Shoulder joint and the $z$-axis of the Elbow joint. In the UR specification, these lengths are precise kinematic parameters (e.g., the Upper Arm length of a UR5 is [425mm](https://www.bila-as.com/media/n2lnzzp4/ur5e_e-series_datasheets_web.pdf)). These parameters constitute the static morphology.
+
+```{ojs}
+//| echo: false
+viewof theta1 = Inputs.range([-180, 180], {value: 30, step: 1, label: "θ₁ (deg)"})
+viewof theta2 = Inputs.range([-180, 180], {value: 45, step: 1, label: "θ₂ (deg)"})
+viewof theta3 = Inputs.range([-180, 180], {value: -75, step: 1, label: "θ₃ (deg)"})
+```
+
+```{ojs}
+//| echo: false
+{
+  const width = 600;
+  const height = 400;
+  const centerX = 150;
+  const centerY = 300;
+  
+  // Link lengths
+  const L1 = 120;
+  const L2 = 100;
+  const L3 = 80;
+  
+  // Convert to radians
+  const t1 = theta1 * Math.PI / 180;
+  const t2 = theta2 * Math.PI / 180;
+  const t3 = theta3 * Math.PI / 180;
+  
+  // Forward kinematics
+  const x1 = centerX + L1 * Math.cos(t1);
+  const y1 = centerY - L1 * Math.sin(t1);
+  
+  const x2 = x1 + L2 * Math.cos(t1 + t2);
+  const y2 = y1 - L2 * Math.sin(t1 + t2);
+  
+  const x3 = x2 + L3 * Math.cos(t1 + t2 + t3);
+  const y3 = y2 - L3 * Math.sin(t1 + t2 + t3);
+  
+  // Helper function to draw coordinate frame
+  function drawFrame(g, x, y, angle, label, scale = 30) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    
+    // X-axis (red)
+    g.append("line")
+      .attr("x1", x)
+      .attr("y1", y)
+      .attr("x2", x + scale * cos)
+      .attr("y2", y - scale * sin)
+      .attr("stroke", "#FF4444")
+      .attr("stroke-width", 2)
+      .attr("marker-end", "url(#arrowRed)");
+    
+    // Y-axis (green)
+    g.append("line")
+      .attr("x1", x)
+      .attr("y1", y)
+      .attr("x2", x - scale * sin)
+      .attr("y2", y - scale * cos)
+      .attr("stroke", "#44FF44")
+      .attr("stroke-width", 2)
+      .attr("marker-end", "url(#arrowGreen)");
+    
+    // Frame label
+    g.append("text")
+      .attr("x", x + 5)
+      .attr("y", y - 35)
+      .attr("fill", "#33C6F4")
+      .attr("font-family", "monospace")
+      .attr("font-size", "14px")
+      .attr("font-weight", "bold")
+      .text(label);
+  }
+  
+  const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("style", "background: #121212; border: 1px solid #4a5568; border-radius: 4px;");
+  
+  // Define arrow markers
+  const defs = svg.append("defs");
+  
+  ["Red", "Green"].forEach(color => {
+    defs.append("marker")
+      .attr("id", `arrow${color}`)
+      .attr("viewBox", "0 0 10 10")
+      .attr("refX", 8)
+      .attr("refY", 5)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto-start-reverse")
+      .append("path")
+      .attr("d", "M 0 0 L 10 5 L 0 10 z")
+      .attr("fill", color === "Red" ? "#FF4444" : "#44FF44");
+  });
+  
+  // Draw links
+  const links = svg.append("g");
+  
+  // Link 1
+  links.append("line")
+    .attr("x1", centerX)
+    .attr("y1", centerY)
+    .attr("x2", x1)
+    .attr("y2", y1)
+    .attr("stroke", "#8F8F8F")
+    .attr("stroke-width", 8)
+    .attr("stroke-linecap", "round");
+  
+  // Link 2
+  links.append("line")
+    .attr("x1", x1)
+    .attr("y1", y1)
+    .attr("x2", x2)
+    .attr("y2", y2)
+    .attr("stroke", "#8F8F8F")
+    .attr("stroke-width", 8)
+    .attr("stroke-linecap", "round");
+  
+  // Link 3
+  links.append("line")
+    .attr("x1", x2)
+    .attr("y1", y2)
+    .attr("x2", x3)
+    .attr("y2", y3)
+    .attr("stroke", "#8F8F8F")
+    .attr("stroke-width", 8)
+    .attr("stroke-linecap", "round");
+  
+  // Draw joints
+  const joints = svg.append("g");
+  
+  [
+    {x: centerX, y: centerY, r: 8},
+    {x: x1, y: y1, r: 7},
+    {x: x2, y: y2, r: 6}
+  ].forEach(j => {
+    joints.append("circle")
+      .attr("cx", j.x)
+      .attr("cy", j.y)
+      .attr("r", j.r)
+      .attr("fill", "#33C6F4")
+      .attr("stroke", "#121212")
+      .attr("stroke-width", 2);
+  });
+  
+  // End-effector
+  joints.append("circle")
+    .attr("cx", x3)
+    .attr("cy", y3)
+    .attr("r", 5)
+    .attr("fill", "#FFD600")
+    .attr("stroke", "#121212")
+    .attr("stroke-width", 2);
+  
+  // Draw coordinate frames
+  const frames = svg.append("g");
+  drawFrame(frames, centerX, centerY, 0, "{0}");
+  drawFrame(frames, x1, y1, t1, "{1}");
+  drawFrame(frames, x2, y2, t1 + t2, "{2}");
+  drawFrame(frames, x3, y3, t1 + t2 + t3, "{3}");
+  
+  // Legend
+  const legend = svg.append("g")
+    .attr("transform", `translate(${width - 150}, 20)`);
+  
+  legend.append("text")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("fill", "#8F8F8F")
+    .attr("font-family", "monospace")
+    .attr("font-size", "12px")
+    .text("Legend:");
+  
+  legend.append("line")
+    .attr("x1", 0)
+    .attr("y1", 15)
+    .attr("x2", 20)
+    .attr("y2", 15)
+    .attr("stroke", "#FF4444")
+    .attr("stroke-width", 2);
+  
+  legend.append("text")
+    .attr("x", 25)
+    .attr("y", 19)
+    .attr("fill", "#8F8F8F")
+    .attr("font-family", "monospace")
+    .attr("font-size", "11px")
+    .text("X-axis");
+  
+  legend.append("line")
+    .attr("x1", 0)
+    .attr("y1", 30)
+    .attr("x2", 20)
+    .attr("y2", 30)
+    .attr("stroke", "#44FF44")
+    .attr("stroke-width", 2);
+  
+  legend.append("text")
+    .attr("x", 25)
+    .attr("y", 34)
+    .attr("fill", "#8F8F8F")
+    .attr("font-family", "monospace")
+    .attr("font-size", "11px")
+    .text("Y-axis");
+  
+  return svg.node();
+}
+```
+
+## The Mechanics of Connectivity: Kinematic Pairs
+If a robot consisted only of unconnected rigid bodies, it would be a flock rather than a mechanism. The bodies must be constrained relative to one another to transmit force and motion. The connection between two rigid bodies is called a joint, or in classical mechanics, a kinematic pair. Joints function by removing degrees of freedom. By connecting two bodies, a joint imposes constraints that prevent certain relative motions while permitting others. The number of independent motions permitted by the joint is its specific degree of freedom, denoted as $f$.
+
+### Lower Pairs
+The most common joints in robotics are called *lower pairs*, characterized by surface contact between the two moving bodies. This surface contact distributes loads effectively, making them durable and suitable for industrial applications like the Universal Robots.
+
+#### The Revolute Joint (R)
+The revolute joint is the fundamental building block of articulated arms. It allows pure rotation about a single axis while preventing all translation and all rotation about orthogonal axes.
+
+- DoF ($f$): 1 (Rotation $\theta$).
+- Constraints ($c$): 5 (3 translations + 2 rotations).
+- Example: Every joint in a Universal Robot (Base, Shoulder, Elbow, Wrist 1, 2 & 3) is a revolute joint.
+
+```{ojs}
+//| echo: false
+viewof theta_revolute = Inputs.range([-180, 180], {value: 0, step: 1, label: "θ (deg)"})
+```
+
+```{ojs}
+//| echo: false
+{
+  const width = 500;
+  const height = 300;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  
+  const theta = theta_revolute * Math.PI / 180;
+  
+  const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("style", "background: #121212; border: 1px solid #4a5568; border-radius: 4px;");
+  
+  // Define arrow marker
+  const defs = svg.append("defs");
+  defs.append("marker")
+    .attr("id", "arrowBlue")
+    .attr("viewBox", "0 0 10 10")
+    .attr("refX", 8)
+    .attr("refY", 5)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto-start-reverse")
+    .append("path")
+    .attr("d", "M 0 0 L 10 5 L 0 10 z")
+    .attr("fill", "#33C6F4");
+  
+  // Draw fixed base (gray rectangle)
+  svg.append("rect")
+    .attr("x", centerX - 60)
+    .attr("y", centerY - 15)
+    .attr("width", 120)
+    .attr("height", 30)
+    .attr("fill", "#4a5568")
+    .attr("stroke", "#8F8F8F")
+    .attr("stroke-width", 2)
+    .attr("rx", 3);
+  
+  svg.append("text")
+    .attr("x", centerX)
+    .attr("y", centerY - 25)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#E0E0E0")
+    .attr("font-family", "monospace")
+    .attr("font-size", "11px")
+    .text("Fixed Base");
+  
+  // Draw rotation axis (Z-axis coming out of screen)
+  svg.append("circle")
+    .attr("cx", centerX)
+    .attr("cy", centerY)
+    .attr("r", 8)
+    .attr("fill", "#33C6F4")
+    .attr("stroke", "#121212")
+    .attr("stroke-width", 2);
+  
+  svg.append("circle")
+    .attr("cx", centerX)
+    .attr("cy", centerY)
+    .attr("r", 3)
+    .attr("fill", "#121212");
+  
+  // Draw rotating link
+  const linkLength = 120;
+  const linkX = centerX + linkLength * Math.cos(theta);
+  const linkY = centerY - linkLength * Math.sin(theta);
+  
+  svg.append("line")
+    .attr("x1", centerX)
+    .attr("y1", centerY)
+    .attr("x2", linkX)
+    .attr("y2", linkY)
+    .attr("stroke", "#8F8F8F")
+    .attr("stroke-width", 12)
+    .attr("stroke-linecap", "round");
+  
+  // Draw end point
+  svg.append("circle")
+    .attr("cx", linkX)
+    .attr("cy", linkY)
+    .attr("r", 6)
+    .attr("fill", "#FFD600")
+    .attr("stroke", "#121212")
+    .attr("stroke-width", 2);
+  
+  // Draw rotation arc
+  const arcRadius = 40;
+  const arcPath = d3.arc()
+    .innerRadius(arcRadius - 2)
+    .outerRadius(arcRadius + 2)
+    .startAngle(0)
+    .endAngle(theta);
+  
+  svg.append("path")
+    .attr("d", arcPath)
+    .attr("transform", `translate(${centerX}, ${centerY})`)
+    .attr("fill", "none")
+    .attr("stroke", "#33C6F4")
+    .attr("stroke-width", 2)
+    .attr("opacity", 0.7);
+  
+  // Draw rotation arrow
+  if (Math.abs(theta) > 0.1) {
+    svg.append("line")
+      .attr("x1", centerX + arcRadius * Math.cos(theta))
+      .attr("y1", centerY - arcRadius * Math.sin(theta))
+      .attr("x2", centerX + (arcRadius + 15) * Math.cos(theta))
+      .attr("y2", centerY - (arcRadius + 15) * Math.sin(theta))
+      .attr("stroke", "#33C6F4")
+      .attr("stroke-width", 2)
+      .attr("marker-end", "url(#arrowBlue)");
+  }
+  
+  // Labels
+  const labels = svg.append("g");
+  
+  // Rotation axis label
+  labels.append("text")
+    .attr("x", centerX + 15)
+    .attr("y", centerY - 15)
+    .attr("fill", "#33C6F4")
+    .attr("font-family", "monospace")
+    .attr("font-size", "12px")
+    .attr("font-weight", "bold")
+    .text("Z-axis");
+  
+  // Angle display
+  labels.append("text")
+    .attr("x", 10)
+    .attr("y", 20)
+    .attr("fill", "#8F8F8F")
+    .attr("font-family", "monospace")
+    .attr("font-size", "11px")
+    .text(`θ = ${theta_revolute.toFixed(0)}°`);
+  
+  // Constraints info
+  const constraints = [
+    "✓ Rotation about Z-axis",
+    "✗ Translation (X, Y, Z)",
+    "✗ Rotation (X, Y axes)"
+  ];
+  
+  constraints.forEach((text, i) => {
+    labels.append("text")
+      .attr("x", width - 10)
+      .attr("y", 20 + i * 16)
+      .attr("text-anchor", "end")
+      .attr("fill", text.startsWith("✓") ? "#44FF44" : "#FF4444")
+      .attr("font-family", "monospace")
+      .attr("font-size", "10px")
+      .text(text);
+  });
+  
+  return svg.node();
+}
+```
+
+#### The Prismatic Joint (P)
 The prismatic joint allows pure linear translation along a single axis. It prevents rotation and orthogonal translation.1
 
-DoF ($f$): 1 (Linear distance $d$).
-Constraints ($c$): 5 (2 translations + 3 rotations).
-Example: The linear rail of a gantry crane or the hydraulic cylinder on an excavator. While not present in the standard UR arm, prismatic joints are often added as a "7th axis" linear track to extend the robot's workspace.
-The Cylindrical Joint (C)
-A cylindrical joint allows both rotation and translation along the same axis.9 It is essentially a combination of a revolute and prismatic joint.
+- DoF ($f$): 1 (Linear distance $d$).
+- Constraints ($c$): 5 (2 translations + 3 rotations).
+- Example: The linear rail of a gantry crane or the hydraulic cylinder on an excavator.
 
-DoF ($f$): 2.
-Constraints ($c$): 4.
-The Spherical Joint (S)
-The spherical joint allows rotation about a single point in all three directions (roll, pitch, yaw) but prevents translation.1
+```{ojs}
+//| echo: false
+viewof d_prismatic = Inputs.range([0, 275], {value: 30, step: 1, label: "d (mm)"})
+```
 
-DoF ($f$): 3.
-Constraints ($c$): 3.
-Example: The human shoulder or hip. In robotics, true spherical mechanical joints are rare because they are difficult to actuate. Instead, engineers emulate a spherical joint by placing three revolute joints with intersecting axes in series. The "Spherical Wrist" of a robot like the PUMA 560 is a kinematic emulation of an S-joint, though as we will see, Universal Robots deviate from this design.
-The Planar Joint (E)
+```{ojs}
+//| echo: false
+{
+  const width = 500;
+  const height = 300;
+  const centerX = 100;
+  const centerY = height / 2;
+  
+  const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("style", "background: #121212; border: 1px solid #4a5568; border-radius: 4px;");
+  
+  // Draw fixed base (vertical gray rectangle on left)
+  svg.append("rect")
+    .attr("x", centerX - 40)
+    .attr("y", centerY - 60)
+    .attr("width", 30)
+    .attr("height", 120)
+    .attr("fill", "#4a5568")
+    .attr("stroke", "#8F8F8F")
+    .attr("stroke-width", 2)
+    .attr("rx", 3);
+  
+  svg.append("text")
+    .attr("x", centerX - 25)
+    .attr("y", centerY)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#E0E0E0")
+    .attr("font-family", "monospace")
+    .attr("font-size", "11px")
+    .attr("transform", `rotate(-90, ${centerX - 25}, ${centerY})`)
+    .text("Fixed Base");
+  
+  // Draw linear guide rail
+  svg.append("line")
+    .attr("x1", centerX)
+    .attr("y1", centerY)
+    .attr("x2", centerX + 300)
+    .attr("y2", centerY)
+    .attr("stroke", "#8F8F8F")
+    .attr("stroke-width", 3)
+    .attr("stroke-dasharray", "5,5")
+    .attr("opacity", 0.5);
+  
+  // Draw X-axis label
+  svg.append("text")
+    .attr("x", centerX + 310)
+    .attr("y", centerY + 5)
+    .attr("fill", "#33C6F4")
+    .attr("font-family", "monospace")
+    .attr("font-size", "12px")
+    .attr("font-weight", "bold")
+    .text("X-axis");
+  
+  // Draw sliding block (moves along X)
+  const blockX = centerX + d_prismatic;
+  
+  // Draw connecting rod/cylinder (like a hydraulic cylinder)
+  svg.append("rect")
+    .attr("x", centerX - 10)
+    .attr("y", centerY - 6)
+    .attr("width", Math.max(0, d_prismatic + 10))
+    .attr("height", 12)
+    .attr("fill", "#6B7280")
+    .attr("stroke", "#4a5568")
+    .attr("stroke-width", 1)
+    .attr("rx", 2);
+  
+  svg.append("rect")
+    .attr("x", blockX - 20)
+    .attr("y", centerY - 25)
+    .attr("width", 40)
+    .attr("height", 50)
+    .attr("fill", "#8F8F8F")
+    .attr("stroke", "#33C6F4")
+    .attr("stroke-width", 2)
+    .attr("rx", 3);
+  
+  // Draw center marker on sliding block
+  svg.append("circle")
+    .attr("cx", blockX)
+    .attr("cy", centerY)
+    .attr("r", 4)
+    .attr("fill", "#FFD600")
+    .attr("stroke", "#121212")
+    .attr("stroke-width", 1);
+  
+  // Draw distance indicator
+  if (Math.abs(d_prismatic) > 5) {
+    // Horizontal line showing displacement
+    svg.append("line")
+      .attr("x1", centerX)
+      .attr("y1", centerY - 40)
+      .attr("x2", blockX)
+      .attr("y2", centerY - 40)
+      .attr("stroke", "#33C6F4")
+      .attr("stroke-width", 2);
+    
+    // Arrows at ends
+    svg.append("circle")
+      .attr("cx", centerX)
+      .attr("cy", centerY - 40)
+      .attr("r", 3)
+      .attr("fill", "#33C6F4");
+    
+    svg.append("circle")
+      .attr("cx", blockX)
+      .attr("cy", centerY - 40)
+      .attr("r", 3)
+      .attr("fill", "#33C6F4");
+  }
+  
+  // Labels
+  const labels = svg.append("g");
+  
+  // Distance display
+  labels.append("text")
+    .attr("x", 10)
+    .attr("y", 20)
+    .attr("fill", "#8F8F8F")
+    .attr("font-family", "monospace")
+    .attr("font-size", "11px")
+    .text(`d = ${d_prismatic.toFixed(0)} mm`);
+  
+  // Constraints info
+  const constraints = [
+    "✓ Translation along X-axis",
+    "✗ Translation (Y, Z axes)",
+    "✗ Rotation (all axes)"
+  ];
+  
+  constraints.forEach((text, i) => {
+    labels.append("text")
+      .attr("x", width - 10)
+      .attr("y", 20 + i * 16)
+      .attr("text-anchor", "end")
+      .attr("fill", text.startsWith("✓") ? "#44FF44" : "#FF4444")
+      .attr("font-family", "monospace")
+      .attr("font-size", "10px")
+      .text(text);
+  });
+  
+  return svg.node();
+}
+```
+
+#### The Cylindrical Joint (C)
+A cylindrical joint allows both rotation and translation along the same axis. It is essentially a combination of a revolute and prismatic joint.
+
+- DoF ($f$): 2.
+- Constraints ($c$): 4.
+- Example: The rod and the tube of a [shock absorber](https://en.wikipedia.org/wiki/Shock_absorber), like those found in vehicles, are a classic example. The rod slides into and out of the tube (translation) and can also rotate (rotation) slightly about the axis of the shock absorber.
+
+#### The Spherical Joint (S)
+The spherical joint allows rotation about a single point in all three directions (roll, pitch, yaw) but prevents translation.
+
+- DoF ($f$): 3.
+- Constraints ($c$): 3.
+- Example: The human shoulder or hip. In robotics, true spherical mechanical joints are rare because they are difficult to actuate. Instead, engineers emulate a spherical joint by placing three revolute joints with intersecting axes in series. The *spherical wrist* of a robot like the [PUMA 560](https://en.wikipedia.org/wiki/Programmable_Universal_Machine_for_Assembly) is a kinematic emulation of an S-joint.
+
+#### The Planar Joint (E)
 A planar pair allows a body to slide and rotate on a surface.4
 
-DoF ($f$): 3 (x, y, $\theta$).
-Constraints ($c$): 3.
-Example: An omnidirectional mobile base moving on a warehouse floor behaves kinematically as a planar joint relative to the ground.
-3.2 Higher Pairs
-Higher pairs involve point or line contact rather than surface contact. Examples include gears meshing or a cam follower.10 While critical in the internal transmission of robot actuators (the Harmonic Drive gears inside a UR joint are higher pairs), from a morphological level of analyzing the link structure, we generally treat the actuator output as a simple lower pair (Revolute).
-3.3 Universal Robots Implementation: The 6R Configuration
-The morphology of the Universal Robots e-Series is formally described as a 6R spatial serial manipulator.2 This notation indicates:
+- DoF ($f$): 3 (x, y, $\theta$).
+- Constraints ($c$): 3.
+- Example: An omnidirectional [mobile base](https://mobile-industrial-robots.com/products) moving on a warehouse floor behaves kinematically as a planar joint relative to the ground.
 
-6: There are six joints.
-R: All joints are Revolute.
-Spatial: The robot moves in 3D space.
-Serial: The links are arranged in a single open chain.
-This specific selection of joints is not arbitrary. Revolute joints are easier to seal against dust and fluids than prismatic joints (which have exposed sliding surfaces). They allow the robot to fold back on itself, maximizing the workspace relative to the robot's size. The choice of 6 joints is the minimum required to achieve full spatial positioning (3 positions + 3 orientations), a concept we will validate mathematically in Section 5.
-4. Topological Architectures: Chains and Trees
-Topology in robotics refers to the connectivity graph of the mechanism. If we treat links as nodes and joints as edges, what shape does the graph take? The topology dictates the structural stiffness, the error propagation characteristics, and the complexity of the control problem.1
-4.1 Serial Topology (Open Chains)
-A serial manipulator consists of a single sequence of links connected end-to-end. One end is attached to a fixed base (ground), and the other end is free to move (the end-effector). The Universal Robot is the archetype of a serial topology.1
+### Higher Pairs
+Higher pairs involve point or line contact rather than surface contact. Examples include gears meshing or a cam follower. While critical in the internal transmission of robot actuators (the [Harmonic Drive](https://harmonicdrive.de/en/products) gears inside a UR joint are higher pairs), from a morphological level of analyzing the link structure, we generally treat the actuator output as a simple lower pair (Revolute).
+
+### Practical Case of Study: The 6R Configuration
+The morphology of the Universal Robots is formally described as a 6R spatial serial manipulator. This notation indicates:
+
+- 6: There are six joints.
+- R: All joints are Revolute.
+- Spatial: The robot moves in 3D space.
+- Serial: The links are arranged in a single open chain.
+
+This specific selection of joints is not arbitrary. Revolute joints are easier to seal against dust and fluids than prismatic joints (which have exposed sliding surfaces). They allow the robot to fold back on itself, maximizing the workspace relative to the robot's size. The choice of 6 joints is the minimum required to achieve full spatial positioning (3 positions + 3 orientations), a concept we will validate mathematically in @sec-grubler.
+
+## Topological Architectures: Chains and Trees
+Topology in robotics refers to the connectivity graph of the mechanism. If we treat links as nodes and joints as edges, what shape does the graph take? The topology dictates the structural stiffness, the error propagation characteristics, and the complexity of the control problem.
+
+### Serial Topology (Open Chains)
+A serial manipulator consists of a single sequence of links connected end-to-end. One end is attached to a fixed base (ground), and the other end is free to move (the end-effector). The Universal Robot is the archetype of a serial topology.
+
 Mechanism:
 The motion of the end-effector is the cumulative result of the motions of all preceding joints. Mathematically, the transformation from base to tip is the product of individual joint transformations:
-$T_{base}^{tip} = T_1(\theta_1) \cdot T_2(\theta_2) \cdot... \cdot T_6(\theta_6)$.
+
+$$
+T_{base}^{tip} = T_1(\theta_1) \cdot T_2(\theta_2) \cdot... \cdot T_6(\theta_6)
+$$
+
 Advantages:
 
-Large Workspace: Since each link adds to the length of the previous one, serial robots can reach far into their environment relative to their base footprint.1 A UR10e has a reach of 1300mm despite a small base, allowing it to palletize on large skids.
-Dexterity: The anthropomorphic design (shoulder, elbow, wrist) allows the robot to reach around obstacles and enter cavities.
+- Large Workspace: Since each link adds to the length of the previous one, serial robots can reach far into their environment relative to their base footprint. A UR10e has a [reach of 1300mm](https://a.storyblok.com/f/169662/x/0449217800/ur10e_techsheet_pdf_print.pdf) despite a small base, allowing it to palletize on large skids.
+- Dexterity: The anthropomorphic design (shoulder, elbow, wrist) allows the robot to reach around obstacles and enter cavities.
+
+
 Disadvantages:
 
-Low Stiffness: The structure acts as a cantilever beam. A load at the tip creates a large moment arm at the base. This limits the payload capacity (e.g., UR5e is limited to 5kg) compared to the robot's own weight.
-Accumulated Errors: A small angular error in the shoulder joint ($d\theta$) translates to a large positional error at the tip ($L \cdot d\theta$). Errors stack up through the chain.
-4.2 Parallel Topology (Closed Chains)
-In a parallel manipulator, the end-effector is connected to the base by multiple independent kinematic chains (legs) simultaneously. The chains form closed loops. The Stewart Platform (hexapod) is the classic example.8
-Mechanism:
-The end-effector's position is constrained by all legs simultaneously. To move the platform, all legs must move in coordination.
+- Low Stiffness: The structure acts as a cantilever beam. A load at the tip creates a large moment arm at the base. This limits the payload capacity compared to the robot's own weight.
+- Accumulated Errors: A small angular error in the shoulder joint $d\theta$ translates to a large positional error at the tip $L \cdot d\theta$, errors stack up through the chain.
+
+### Parallel Topology (Closed Chains)
+In a parallel manipulator, the end-effector is connected to the base by multiple independent kinematic chains (legs) simultaneously. The chains form closed loops. The [Stewart Platform](https://en.wikipedia.org/wiki/Stewart_platform) is the classic example.
+
+Mechanism: The end-effector's position is constrained by all legs simultaneously. To move the platform, all legs must move in coordination.
+
 Advantages:
 
-High Stiffness and Payload: The load is shared across multiple legs. Struts experience compression/tension rather than just bending, allowing for much higher payloads relative to structural weight.
-High Precision: Errors in one leg are averaged out or constrained by the others, rather than accumulating.
-Dynamics: Heavy motors can be mounted at the stationary base, reducing the moving mass and allowing for extremely high accelerations (e.g., Delta robots used in pick-and-place).
+- High Stiffness and Payload: The load is shared across multiple legs. Struts experience compression/tension rather than just bending, allowing for much higher payloads relative to structural weight.
+- High Precision: Errors in one leg are averaged out or constrained by the others, rather than accumulating.
+- Dynamics: Heavy motors can be mounted at the stationary base, reducing the moving mass and allowing for extremely high accelerations, for example, [delta robots](https://en.wikipedia.org/wiki/Delta_robot) used in pick-and-place.
+
 Disadvantages:
 
-Small Workspace: The motion range is limited to the intersection of the workspaces of all legs. Parallel robots generally cannot "reach around" obstacles.
-Complex Kinematics: While Inverse Kinematics (finding joint angles for a given position) is easy for parallel robots, Forward Kinematics (finding position from joint angles) is extremely difficult, often requiring the solution of high-order polynomials.
-Relevance to UR:
-While the UR itself is serial, Physical AI often creates temporary parallel topologies. When two UR5 robots grasp a single heavy box to move it together, they form a closed kinematic chain. The system topology changes from two open serial chains to one closed parallel mechanism. The controller must account for this change, or the robots will fight each other, building up internal forces that can trigger safety stops or damage the payload.
-4.3 Branched Topology
-Branched topologies feature a central base or trunk that splits into multiple open chains. This is the topology of biological systems (torso to arms/legs) and humanoid robots.1
-A UR robot mounted with a multi-fingered hand (e.g., a Robotiq 3-finger gripper) becomes a branched system. The arm is the trunk, and the fingers are the branches. The topology is a tree. Kinematically, tree structures are handled by treating each branch as a serial chain extending from the branching point. Recursive algorithms (like the Newton-Euler algorithm for dynamics) are particularly efficient for these topologies.
-5. Mathematical Mobility: The Kutzbach, Grübler Criterion
-In Physical AI, we need a rigorous way to determine the capabilities of a morphology before we even begin simulation. The most fundamental question is: "How many independent control variables does this system possess?" We answer this using the Chebychev-Grübler-Kutzbach criterion, often simply called Grübler's Formula.6
-5.1 Derivation from First Principles
+- Small Workspace: The motion range is limited to the intersection of the workspaces of all legs. Parallel robots generally cannot "reach around" obstacles.
+- Complex Kinematics: While Inverse Kinematics (finding joint angles for a given position) is easy for parallel robots, Forward Kinematics (finding position from joint angles) is difficult, often requiring the solution of high-order polynomials.
+
+### Branched Topology
+Branched topologies feature a central base or trunk that splits into multiple open chains. This is the topology of biological systems (torso to arms/legs) and [humanoid robots](https://en.wikipedia.org/wiki/Humanoid_robot).
+A UR robot mounted with a multi-fingered hand (e.g., a [Robotiq 3-finger gripper](https://www.universal-robots.com/marketplace/products/01tP40000071NgLIAU/)) becomes a branched system. The arm is the trunk, and the fingers are the branches. The topology is a tree. Kinematically, tree structures are handled by treating each branch as a serial chain extending from the branching point. Recursive algorithms, like the [Newton-Euler algorithm](https://en.wikipedia.org/wiki/Newton%E2%80%93Euler_equations) for dynamics, are particularly efficient for these topologies.
+
+## Mathematical Mobility: The Kutzbach, Grübler Criterion {#sec-grubler}
+In Physical AI, we need a rigorous way to determine the capabilities of a morphology before we even begin simulation. The most fundamental question is: *How many independent control variables does this system possess?* We answer this using the Chebychev-Grübler-Kutzbach criterion, often simply called Grübler's Formula.
+
+### Derivation from First Principles
 Let us derive the formula for a spatial mechanism (3D space).
 
-Unconstrained System: Consider $N$ rigid bodies floating in space. Each body has 6 DoF.
+1. Unconstrained System: Consider $N$ rigid bodies floating in space. Each body has 6 DoF.
 Total DoF = $6N$.
 
-Fixing the Ground: One link is the base (ground) and is fixed. It has 0 DoF.
-Remaining DoF = $6(N - 1)$.8
+2. Fixing the Ground: One link is the base (ground) and is fixed. It has 0 DoF.
+Remaining DoF = $6(N - 1)$.
 
-Adding Constraints (Joints): We connect the bodies with $J$ joints. Each joint $i$ allows $f_i$ degrees of freedom.
-Conversely, each joint removes $c_i = 6 - f_i$ degrees of freedom.11
+3. Adding Constraints (Joints): We connect the bodies with $J$ joints. Each joint $i$ allows $f_i$ degrees of freedom. Conversely, each joint removes $c_i = 6 - f_i$ degrees of freedom.
 
-The Formula: The mobility $M$ of the mechanism is the initial freedom minus the constraints removed by the joints.
+4. The Formula: The mobility $M$ of the mechanism is the initial freedom minus the constraints removed by the joints.
 
 $$M = 6(N - 1) - \sum_{i=1}^{J} (6 - f_i)$$
+
 For a planar mechanism (2D), the constants change because a planar body has only 3 DoF:
 
 $$M_{planar} = 3(N - 1) - \sum_{i=1}^{J} (3 - f_i)$$
-5.2 Application to Universal Robots
+
+### Application of Grübler's Formula to Universal Robots
 Let us calculate the mobility of a UR5 robot to verify its classification.
 
 Links ($N$): Base (fixed), Shoulder, Upper Arm, Forearm, Wrist 1, Wrist 2, Wrist 3 (flange).
@@ -203,33 +752,44 @@ Substituting into the spatial formula:
 
 $$M = 6(7 - 1) - \sum_{i=1}^{6} (6 - 1) \\ M = 6(6) - 6(5) \\ M = 36 - 30$$
 $$M = 6$$
-The calculation confirms that the UR5 is a 6-DoF mechanism. This is a critical result. It means we need exactly 6 motors to fully determine the robot's configuration. Since the task space (position + orientation) is also 6-dimensional (see Section 6), the UR5 is fully actuated but not redundant.
-5.3 Redundancy and Deficiency
+The calculation confirms that the UR5 is a 6-DoF mechanism. This is a critical result. It means we need exactly 6 motors to fully determine the robot's configuration. Since the task space (position + orientation) is also 6-dimensional (see @sec-se3), the UR5 is fully actuated but not redundant.
+
+### Redundancy and Deficiency
 The relationship between the robot's mobility $M$ and the task space dimension (usually 6) defines the nature of the control problem.
 
-Kinematically Deficient ($M < 6$): If a robot has fewer than 6 DoF, it cannot reach every pose in its workspace. A 4-axis SCARA robot ($M=4$) can position X, Y, Z and rotate Yaw, but it cannot tilt (Pitch or Roll). It is deficient for tasks requiring arbitrary orientation (like pouring a drink).13
-Redundant ($M > 6$): If a robot has more than 6 DoF, it is redundant. A 7-DoF robot (like the KUKA iiwa or the Franka Emika) has $M=7$. This means for any fixed end-effector pose, there is $7 - 6 = 1$ degree of freedom of internal motion. The robot can move its "elbow" without moving its "hand." This "Null Space" motion is a superpower in Physical AI, allowing the agent to optimize for secondary objectives (like avoiding a collision or minimizing energy) while maintaining the primary task.13Note: The standard UR series is not redundant. It has exactly 6 DoF. To reach a specific pose, the elbow position is mathematically fixed (up to a finite number of discrete solutions). This makes collision avoidance harder for UR robots compared to 7-DoF arms.
-5.4 Paradoxical Linkages: When the Formula Fails
-The Grübler-Kutzbach criterion provides a lower bound on mobility, but it assumes that all constraints are independent. It is a "generic" count. However, there exist special geometric arrangements where the constraints overlap in a way that allows motion where the formula predicts rigidity ($M \le 0$). These are called Paradoxical Linkages.6
-A famous example is the Bennett Linkage (1903). It is a spatial 4-bar linkage constructed with revolute joints.
+Kinematically Deficient ($M < 6$): If a robot has fewer than 6 DoF, it cannot reach every pose in its workspace. A 4-axis [SCARA robot](https://en.wikipedia.org/wiki/SCARA) ($M=4$) can position X, Y, Z and rotate Yaw, but it cannot tilt (Pitch or Roll). It is deficient for tasks requiring arbitrary orientation (like pouring a drink).
 
-Links: $N=4$.
-Joints: $J=4$ (Revolute).
-Formula: $M = 6(4-1) - 4(5) = 18 - 20 = -2$.
+Redundant ($M > 6$): If a robot has more than 6 DoF, it is redundant. A 7 DoF robot (like the [KUKA iiwa](https://www.kuka.com/en-de/products/robot-systems/industrial-robots/lbr-iiwa) or the [Franka Emika](https://franka.de/franka-research-3)) has $M=7$. This means for any fixed end-effector pose, there is $7 - 6 = 1$ degree of freedom of internal motion. The robot can move its *elbow* without moving its *hand*. This *null space* motion is convenient in Physical AI, allowing the agent to optimize for secondary objectives (like avoiding a collision or minimizing energy) while maintaining the primary task.
+
+### Paradoxical Linkages: When the Formula Fails
+The Grübler criterion provides a lower bound on mobility, but it assumes that all constraints are independent. It is a *generic* count. However, there exist special geometric arrangements where the constraints overlap in a way that allows motion where the formula predicts rigidity ($M \le 0$). These are called Paradoxical Linkages.
+
+A famous example is the [Bennett Linkage](https://en.wikipedia.org/wiki/Overconstrained_mechanism#:~:text=%5B1%5D-,Bennett%27s%20linkage,-%5Bedit%5D) (1903). It is a spatial 4-bar linkage constructed with revolute joints.
+
+- Links: $N=4$.
+- Joints: $J=4$ (Revolute).
+- Formula: $M = 6(4-1) - 4(5) = 18 - 20 = -2$.
+
 The formula predicts it is a statically indeterminate structure (overconstrained) with no mobility.
-However, if the link lengths and twist angles satisfy specific geometric conditions (Bennett's conditions: opposite links have equal lengths and twists), the mechanism moves with 1 DoF ($M=1$).14 The mechanism "defies" the generic count because the constraint equations are dependent.
-Another example is the Sarrus Linkage, which converts rotary motion to linear motion using two perpendicular sets of hinged plates. The formula predicts $M=0$, but it moves freely.
-Why this matters for Physical AI:
-While industrial arms like the UR avoid these paradoxes to ensure predictable control, researchers in Physical AI often design novel soft or compliant mechanisms. A "paradoxical" design might be used to create a mechanism that is rigid in all directions except the one specific path desired for the task. Furthermore, manufacturing errors can turn a mobile paradoxical linkage into a locked structure (if the Bennett conditions are slightly violated). This highlights the gap between the mathematical topology (perfect geometry) and the physical morphology (toleranced manufacturing).6
-6. The Manifold of Motion: SE(3)
-We have stated that the UR robot has 6 degrees of freedom and moves in a 6-dimensional task space. But what is the nature of this space? It is not a simple vector space like $\mathbb{R}^6$. It is a mathematical manifold known as the Special Euclidean Group, denoted $SE(3)$.15
-6.1 Why 6 Dimensions?
-The configuration of a rigid body is defined by where it is (Position) and which way it faces (Orientation).
+However, if the link lengths and twist angles satisfy specific geometric conditions (Bennett's conditions: opposite links have equal lengths and twists), the mechanism moves with 1 DoF ($M=1$). The mechanism *defies* the generic count because the constraint equations are dependent.
 
-Position: Defined by a vector $\mathbf{p} = [x, y, z]^T \in \mathbb{R}^3$.
-Orientation: Defining orientation is more complex. We might use Euler angles (Roll, Pitch, Yaw), but these suffer from "Gimbal Lock"—singularities where two axes align and a degree of freedom is lost. A rigorous treatment uses Rotation Matrices $R \in SO(3)$, the Special Orthogonal group of $3 \times 3$ matrices with determinant +1. The group $SO(3)$ is 3-dimensional.
-Total: The product of $\mathbb{R}^3$ (translations) and $SO(3)$ (rotations) forms the 6-dimensional manifold $SE(3)$.
-6.2 The Structure of SE(3)
+Another example is the [Sarrus Linkage](https://en.wikipedia.org/wiki/Overconstrained_mechanism#:~:text=of%20steam%20locomotives.-,Sarrus%20linkage,-%5Bedit%5D), which converts rotary motion to linear motion using two perpendicular sets of hinged plates. The formula predicts $M=0$, but it moves freely.
+
+#### Why This Matters for Physical AI
+While industrial arms like the UR avoid these paradoxes to ensure predictable control, researchers in Physical AI often design novel soft or compliant mechanisms. A *paradoxical* design might be used to create a mechanism that is rigid in all directions except the one specific path desired for the task. Furthermore, manufacturing errors can turn a mobile paradoxical linkage into a locked structure (if the Bennett conditions are slightly violated). This highlights the gap between the mathematical topology (perfect geometry) and the physical morphology (toleranced manufacturing).
+
+## The Manifold of Motion: SE(3) {#sec-se3}
+We have stated that the UR robot has 6 degrees of freedom and moves in a 6-dimensional task space. But what is the nature of this space? It is not a simple vector space like $\mathbb{R}^6$. It is a mathematical [manifold](https://en.wikipedia.org/wiki/Manifold) known as the Special Euclidean Group, denoted $SE(3)$.
+
+**Did you know?** A manifold is a shape or space that, from a distance, might look curved, complicated, or weird, but if you zoom in and look at just a tiny piece of it, it looks like *normal* flat space. One of the best examples is the surface of the Earth.
+
+### Why 6 Dimensions?
+The configuration of a rigid body is defined by where it is Position) and which way it faces (Orientation).
+
+- Position: Defined by a vector $\mathbf{p} = [x, y, z]^T \in \mathbb{R}^3$.
+- Orientation: Defining orientation is more complex. We might use Euler angles (Roll, Pitch, Yaw), but these suffer from "Gimbal Lock"—singularities where two axes align and a degree of freedom is lost. A rigorous treatment uses Rotation Matrices $R \in SO(3)$, the Special Orthogonal group of $3 \times 3$ matrices with determinant +1. The group $SO(3)$ is 3-dimensional.
+- Total: The product of $\mathbb{R}^3$ (translations) and $SO(3)$ (rotations) forms the 6-dimensional manifold $SE(3)$.
+
 $SE(3)$ is a Lie Group, meaning it is both a group (in the algebraic sense) and a smooth manifold (in the topological sense).16
 An element $T \in SE(3)$ represents a rigid body transformation. It is standardly represented as a $4 \times 4$ homogeneous transformation matrix:
 $$T = \begin{bmatrix} R & \mathbf{p} \\ \mathbf{0}^T & 1 \end{bmatrix} = \begin{bmatrix} r_{11} & r_{12} & r_{13} & x \\ r_{21} & r_{22} & r_{23} & y \\ r_{31} & r_{32} & r_{33} & z \\ 0 & 0 & 0 & 1 \end{bmatrix}$$
