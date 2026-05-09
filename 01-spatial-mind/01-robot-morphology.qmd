@@ -27,7 +27,6 @@ For a single rigid body floating freely in space:
 - It can rotate about the X, Y, and Z axes. (3 DoF)
 - Total DoF = 6.
 
-::: {layout-ncol=2}
 #### Translation
 ```{ojs}
 //| echo: false
@@ -43,7 +42,6 @@ viewof rx = Inputs.range([-180, 180], {value: 0, step: 1, label: "Rx (Roll)"})
 viewof ry = Inputs.range([-180, 180], {value: 0, step: 1, label: "Ry (Pitch)"})
 viewof rz = Inputs.range([-180, 180], {value: 0, step: 1, label: "Rz (Yaw)"})
 ```
-:::
 
 ```{ojs}
 //| echo: false
@@ -351,7 +349,6 @@ A 90-degree rotation about the Z-axis is:
 
 $$\mathbf{q}_{90°,z} = \left(\cos\frac{\pi}{4},\; 0,\; 0,\; \sin\frac{\pi}{4}\right) = \left(\frac{\sqrt{2}}{2},\; 0,\; 0,\; \frac{\sqrt{2}}{2}\right)$$
 
-> [!CAUTION]
 > Beware of the PhysX layer. Underneath Isaac Sim, the NVIDIA PhysX engine uses the **scalar-last** $(x, y, z, w)$ convention. If you interface directly with the Dynamic Control or PhysX extensions, you will encounter `xyzw` ordering. Isaac Sim provides utility functions `wxyz2xyzw()` and `xyzw2wxyz()` in its transformation libraries for conversion. Mixing these conventions silently produces rotations that *look* almost correct but are subtly wrong—often the hardest kind of bug to diagnose.
 
 The general formula to convert an axis-angle representation (rotation of angle $\theta$ about a unit axis $\hat{\mathbf{u}} = [u_x, u_y, u_z]$) to a quaternion is:
@@ -360,7 +357,6 @@ $$\mathbf{q} = \left(\cos\frac{\theta}{2},\; u_x \sin\frac{\theta}{2},\; u_y \si
 
 Notice the $\theta/2$ factor: quaternions encode *half-angles*. This is precisely why $\mathbf{q}$ and $-\mathbf{q}$ represent the same rotation—negating all four components is equivalent to adding $2\pi$ to $\theta$, which is a full turn.
 
-::: {layout-ncol=2}
 #### Rotation Axis
 ```{ojs}
 //| echo: false
@@ -374,7 +370,7 @@ viewof axisZ = Inputs.range([-1, 1], {value: 1, step: 0.01, label: "Axis Z"})
 //| echo: false
 viewof angleTheta = Inputs.range([-360, 360], {value: 0, step: 1, label: "θ (deg)"})
 ```
-:::
+
 
 ```{ojs}
 //| echo: false
@@ -407,10 +403,10 @@ quatData = {
 ```{ojs}
 //| echo: false
 {
-  const width = 700;
-  const height = 320;
+  const width = 500;
+  const height = 300;
   const container = document.createElement("div");
-  container.style.cssText = "position:relative;width:100%;max-width:700px;margin:0 auto;background:#121212;border:1px solid #4a5568;border-radius:4px;overflow:hidden;";
+  container.style.cssText = "position:relative;width:100%;max-width:500px;margin:0 auto;background:#121212;border:1px solid #4a5568;border-radius:4px;overflow:hidden;";
 
   const canvas = document.createElement("canvas");
   canvas.width = width * 2;
@@ -424,9 +420,11 @@ quatData = {
   renderer.setClearColor(0x121212);
 
   const scene = new THREE.Scene();
+  const panX = 1.8;
+  const panY = -0.2;
   const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-  camera.position.set(-2.5, 2.5, 4.5);
-  camera.lookAt(0, 0, 0);
+  camera.position.set(-2.5 + panX, 2.5 + panY, 4.5);
+  camera.lookAt(panX, panY, 0);
 
   const amb = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(amb);
@@ -529,7 +527,7 @@ quatData = {
   // HUD overlay
   const hud = document.createElement("div");
   hud.style.cssText = "position:absolute;top:8px;left:8px;color:#8F8F8F;font-family:monospace;font-size:0.78rem;background:rgba(0,0,0,0.6);padding:6px 8px;border-radius:4px;pointer-events:none;";
-  hud.innerHTML = `θ = ${quatData.angleTheta}° · axis = [${quatData.nx.toFixed(2)}, ${quatData.ny.toFixed(2)}, ${quatData.nz.toFixed(2)}]`;
+  hud.innerHTML = `θ = ${quatData.angleTheta}° · axis = [${quatData.nx.toFixed(2)}, ${quatData.ny.toFixed(2)}, ${quatData.nz.toFixed(2)}] · pan = [${panX.toFixed(2)}, ${panY.toFixed(2)}]`;
   container.appendChild(hud);
 
   // Legend
