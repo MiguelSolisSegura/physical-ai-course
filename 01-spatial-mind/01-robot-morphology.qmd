@@ -304,6 +304,303 @@ viewof theta3 = Inputs.range([-180, 180], {value: -75, step: 1, label: "θ₃ (d
 }
 ```
 
+### Quaternions: A Singularity-Free Orientation
+
+While rotation matrices $R \in SO(3)$ are the most rigorous representation for orientation, they are not always the most *practical*. A $3 \times 3$ matrix uses 9 numbers to encode only 3 degrees of freedom, and maintaining the orthogonality constraint ($R^T R = I$, $\det(R) = +1$) during numerical computation is expensive. Euler angles $(roll, pitch, yaw)$ use only 3 numbers, which is minimal, but they suffer from the notorious **Gimbal Lock** problem: certain configurations cause two rotation axes to align, collapsing the representation from 3 DoF to 2 DoF and creating a singularity in the parameterization.
+
+Quaternions offer a middle ground. Discovered by [William Rowan Hamilton](https://en.wikipedia.org/wiki/William_Rowan_Hamilton) in 1843, they extend the complex numbers with three imaginary units $\mathbf{i}$, $\mathbf{j}$, $\mathbf{k}$ satisfying the fundamental relation $\mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = \mathbf{ijk} = -1$. A quaternion $\mathbf{q}$ is written as:
+
+$$\mathbf{q} = w + x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$$
+
+where $w$ is the *scalar* (or *real*) part and $(x, y, z)$ is the *vector* (or *imaginary*) part. For representing rotations, we restrict ourselves to **unit quaternions**, those satisfying the constraint:
+
+$$\|\mathbf{q}\| = \sqrt{w^2 + x^2 + y^2 + z^2} = 1$$
+
+The set of unit quaternions forms a 3-dimensional sphere $S^3$ embedded in $\mathbb{R}^4$. This is a double cover of $SO(3)$: the quaternions $\mathbf{q}$ and $-\mathbf{q}$ represent *the same rotation*. This antipodal equivalence is a subtle topological fact that must be handled carefully in learning algorithms (for example, when computing a loss function on predicted orientations, one must compare against both $\mathbf{q}$ and $-\mathbf{q}$ and take the minimum).
+
+#### Why Quaternions Matter for Physical AI
+
+Quaternions solve several critical problems that arise when training agents in simulation:
+
+1. **No Gimbal Lock.** Because quaternions parameterize the full $S^3$ sphere, there is no configuration where the representation degenerates. An agent controlling a robot's wrist orientation will never encounter a sudden loss of controllability due to the representation itself.
+
+2. **Smooth Interpolation (SLERP).** To blend between two orientations $\mathbf{q}_1$ and $\mathbf{q}_2$ (e.g., for trajectory generation or motion planning), quaternions provide Spherical Linear Interpolation:
+
+$$\text{SLERP}(\mathbf{q}_1, \mathbf{q}_2, t) = \frac{\sin((1-t)\Omega)}{\sin \Omega}\mathbf{q}_1 + \frac{\sin(t\Omega)}{\sin \Omega}\mathbf{q}_2$$
+
+where $\Omega = \cos^{-1}(\mathbf{q}_1 \cdot \mathbf{q}_2)$. This traces the shortest arc on the rotation manifold at constant angular velocity, something impossible to achieve with Euler angle interpolation (which produces erratic, wobbly paths).
+
+3. **Compact and Stable.** With only 4 numbers (compared to 9 for a rotation matrix), quaternions are memory-efficient. Renormalization after numerical drift requires only dividing by the norm, whereas re-orthogonalizing a rotation matrix requires a Gram-Schmidt process or SVD decomposition.
+
+4. **Composition.** Composing two rotations is a quaternion multiplication (Hamilton product), which requires 16 multiplications and 12 additions, compared to 27 multiplications and 18 additions for $3 \times 3$ matrix multiplication.
+
+#### The Quaternion Convention in Isaac Sim
+
+When working with quaternions in practice, there is a critical implementation detail that has caused countless bugs in robotics code: **the ordering of the scalar and vector components**. Two conventions exist in the wild:
+
+| Convention | Format | Used by |
+|---|---|---|
+| **Scalar-first** | $(w, x, y, z)$ | Isaac Sim (USD), ROS 2 (tf2), Eigen (C++), Blender |
+| **Scalar-last** | $(x, y, z, w)$ | PhysX, PyBullet, Unity, Isaac Gym (legacy) |
+
+**NVIDIA Isaac Sim uses the scalar-first $(w, x, y, z)$ convention** in its core APIs and USD (Universal Scene Description) layer. This means that the identity rotation (no rotation at all) is represented as:
+
+$$\mathbf{q}_{identity} = (1, 0, 0, 0)$$
+
+A 90-degree rotation about the Z-axis is:
+
+$$\mathbf{q}_{90°,z} = \left(\cos\frac{\pi}{4},\; 0,\; 0,\; \sin\frac{\pi}{4}\right) = \left(\frac{\sqrt{2}}{2},\; 0,\; 0,\; \frac{\sqrt{2}}{2}\right)$$
+
+> [!CAUTION]
+> Beware of the PhysX layer. Underneath Isaac Sim, the NVIDIA PhysX engine uses the **scalar-last** $(x, y, z, w)$ convention. If you interface directly with the Dynamic Control or PhysX extensions, you will encounter `xyzw` ordering. Isaac Sim provides utility functions `wxyz2xyzw()` and `xyzw2wxyz()` in its transformation libraries for conversion. Mixing these conventions silently produces rotations that *look* almost correct but are subtly wrong—often the hardest kind of bug to diagnose.
+
+The general formula to convert an axis-angle representation (rotation of angle $\theta$ about a unit axis $\hat{\mathbf{u}} = [u_x, u_y, u_z]$) to a quaternion is:
+
+$$\mathbf{q} = \left(\cos\frac{\theta}{2},\; u_x \sin\frac{\theta}{2},\; u_y \sin\frac{\theta}{2},\; u_z \sin\frac{\theta}{2}\right)$$
+
+Notice the $\theta/2$ factor: quaternions encode *half-angles*. This is precisely why $\mathbf{q}$ and $-\mathbf{q}$ represent the same rotation—negating all four components is equivalent to adding $2\pi$ to $\theta$, which is a full turn.
+
+::: {layout-ncol=2}
+#### Rotation Axis
+```{ojs}
+//| echo: false
+viewof axisX = Inputs.range([-1, 1], {value: 0, step: 0.01, label: "Axis X"})
+viewof axisY = Inputs.range([-1, 1], {value: 0, step: 0.01, label: "Axis Y"})
+viewof axisZ = Inputs.range([-1, 1], {value: 1, step: 0.01, label: "Axis Z"})
+```
+
+#### Rotation Angle
+```{ojs}
+//| echo: false
+viewof angleTheta = Inputs.range([-360, 360], {value: 0, step: 1, label: "θ (deg)"})
+```
+:::
+
+```{ojs}
+//| echo: false
+THREE = {
+  const mod = await import("https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js");
+  return mod;
+}
+```
+
+```{ojs}
+//| echo: false
+quatData = {
+  let ax = axisX, ay = axisY, az = axisZ;
+  const mag = Math.sqrt(ax * ax + ay * ay + az * az);
+  if (mag < 1e-8) { ax = 0; ay = 0; az = 1; }
+  const nx = mag < 1e-8 ? 0 : ax / mag;
+  const ny = mag < 1e-8 ? 0 : ay / mag;
+  const nz = mag < 1e-8 ? 1 : az / mag;
+  const thetaRad = angleTheta * Math.PI / 180;
+  const halfT = thetaRad / 2;
+  const w = Math.cos(halfT);
+  const sinH = Math.sin(halfT);
+  const qx = nx * sinH;
+  const qy = ny * sinH;
+  const qz = nz * sinH;
+  return { ax, ay, az, mag, nx, ny, nz, thetaRad, halfT, w, sinH, qx, qy, qz, angleTheta };
+}
+```
+
+```{ojs}
+//| echo: false
+{
+  const width = 700;
+  const height = 320;
+  const container = document.createElement("div");
+  container.style.cssText = "position:relative;width:100%;max-width:700px;margin:0 auto;background:#121212;border:1px solid #4a5568;border-radius:4px;overflow:hidden;";
+
+  const canvas = document.createElement("canvas");
+  canvas.width = width * 2;
+  canvas.height = height * 2;
+  canvas.style.cssText = `width:100%;height:auto;aspect-ratio:${width}/${height};display:block;`;
+  container.appendChild(canvas);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+  renderer.setSize(width * 2, height * 2);
+  renderer.setPixelRatio(1);
+  renderer.setClearColor(0x121212);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+  camera.position.set(-2.5, 2.5, 4.5);
+  camera.lookAt(0, 0, 0);
+
+  const amb = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(amb);
+  const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+  dir.position.set(3, 5, 4);
+  scene.add(dir);
+
+  // Grid helper
+  const grid = new THREE.GridHelper(4, 8, 0x333333, 0x222222);
+  scene.add(grid);
+
+  // Axes helper
+  const axesH = new THREE.AxesHelper(1.5);
+  scene.add(axesH);
+
+  // Build asymmetric box with 6 different colored faces and labels
+  const boxGeo = new THREE.BoxGeometry(1.4, 1.0, 0.7);
+  const faceColors = [
+    0xFF4444, // +X  Red
+    0xCC2222, // -X  Dark Red
+    0x44FF44, // +Y  Green
+    0x22AA22, // -Y  Dark Green
+    0x3399FF, // +Z  Blue
+    0x1166CC  // -Z  Dark Blue
+  ];
+  const faceMats = faceColors.map(c => new THREE.MeshPhongMaterial({
+    color: c, transparent: true, opacity: 0.85, side: THREE.FrontSide
+  }));
+  const box = new THREE.Mesh(boxGeo, faceMats);
+  scene.add(box);
+
+  // Add face label sprites
+  const faceLabels = [
+    { text: "+X", pos: [0.75, 0, 0], color: "#FF4444" },
+    { text: "-X", pos: [-0.75, 0, 0], color: "#CC2222" },
+    { text: "+Y", pos: [0, 0.55, 0], color: "#44FF44" },
+    { text: "-Y", pos: [0, -0.55, 0], color: "#22AA22" },
+    { text: "+Z", pos: [0, 0, 0.4], color: "#3399FF" },
+    { text: "-Z", pos: [0, 0, -0.4], color: "#1166CC" }
+  ];
+  const labelGroup = new THREE.Group();
+  faceLabels.forEach(fl => {
+    const canv = document.createElement("canvas");
+    canv.width = 64; canv.height = 32;
+    const ctx = canv.getContext("2d");
+    ctx.fillStyle = fl.color;
+    ctx.font = "bold 22px monospace";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(fl.text, 32, 16);
+    const tex = new THREE.CanvasTexture(canv);
+    const spriteMat = new THREE.SpriteMaterial({ map: tex, depthTest: false });
+    const sprite = new THREE.Sprite(spriteMat);
+    sprite.position.set(fl.pos[0], fl.pos[1], fl.pos[2]);
+    sprite.scale.set(0.35, 0.18, 1);
+    labelGroup.add(sprite);
+  });
+  scene.add(labelGroup);
+
+  // Rotation axis line
+  const axisLineGeo = new THREE.BufferGeometry();
+  const axisLineMat = new THREE.LineBasicMaterial({ color: 0xFFD600, linewidth: 2 });
+  const axisLine = new THREE.Line(axisLineGeo, axisLineMat);
+  scene.add(axisLine);
+
+  // Axis arrowhead (cone)
+  const coneGeo = new THREE.ConeGeometry(0.06, 0.2, 8);
+  const coneMat = new THREE.MeshBasicMaterial({ color: 0xFFD600 });
+  const cone = new THREE.Mesh(coneGeo, coneMat);
+  scene.add(cone);
+
+  function update(d) {
+    // Update axis line
+    const len = 2.5;
+    const pts = new Float32Array([
+      -d.nx * len, -d.ny * len, -d.nz * len,
+       d.nx * len,  d.ny * len,  d.nz * len
+    ]);
+    axisLine.geometry.dispose();
+    axisLine.geometry = new THREE.BufferGeometry();
+    axisLine.geometry.setAttribute("position", new THREE.BufferAttribute(pts, 3));
+
+    // Position cone at tip of axis
+    cone.position.set(d.nx * len, d.ny * len, d.nz * len);
+    cone.quaternion.setFromUnitVectors(
+      new THREE.Vector3(0, 1, 0),
+      new THREE.Vector3(d.nx, d.ny, d.nz).normalize()
+    );
+
+    // Apply quaternion to box + labels
+    const q = new THREE.Quaternion(d.qx, d.qy, d.qz, d.w);
+    box.quaternion.copy(q);
+    labelGroup.quaternion.copy(q);
+
+    renderer.render(scene, camera);
+  }
+
+  update(quatData);
+
+  // HUD overlay
+  const hud = document.createElement("div");
+  hud.style.cssText = "position:absolute;top:8px;left:8px;color:#8F8F8F;font-family:monospace;font-size:0.78rem;background:rgba(0,0,0,0.6);padding:6px 8px;border-radius:4px;pointer-events:none;";
+  hud.innerHTML = `θ = ${quatData.angleTheta}° · axis = [${quatData.nx.toFixed(2)}, ${quatData.ny.toFixed(2)}, ${quatData.nz.toFixed(2)}]`;
+  container.appendChild(hud);
+
+  // Legend
+  const legend = document.createElement("div");
+  legend.style.cssText = "position:absolute;bottom:8px;left:8px;color:#8F8F8F;font-family:monospace;font-size:0.7rem;background:rgba(0,0,0,0.55);padding:4px 7px;border-radius:4px;pointer-events:none;line-height:1.5;";
+  legend.innerHTML = `<span style="color:#FFD600">━━</span> Rotation Axis &nbsp; <span style="color:#FF4444">━━</span> X &nbsp; <span style="color:#44FF44">━━</span> Y &nbsp; <span style="color:#3399FF">━━</span> Z`;
+  container.appendChild(legend);
+
+  invalidation.then(() => { renderer.dispose(); });
+  return container;
+}
+```
+
+```{ojs}
+//| echo: false
+{
+  const d = quatData;
+  const fmt = v => v < 0 ? v.toFixed(4) : " " + v.toFixed(4);
+
+  const html_str = `
+  <div style="background:#121212;border:1px solid #4a5568;border-radius:4px;padding:16px 20px;font-family:monospace;font-size:0.85rem;color:#E0E0E0;line-height:1.8;">
+    <div style="color:#8F8F8F;margin-bottom:4px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">Step-by-Step Quaternion Calculation</div>
+    <div style="margin-bottom:8px;">
+      <span style="color:#8F8F8F;">Input axis:</span> [${d.ax.toFixed(2)}, ${d.ay.toFixed(2)}, ${d.az.toFixed(2)}]
+      &nbsp;→&nbsp;
+      <span style="color:#8F8F8F;">‖axis‖ =</span> ${d.mag.toFixed(4)}
+    </div>
+    <div style="margin-bottom:8px;">
+      <span style="color:#FFD600;">Normalized axis û:</span> [${d.nx.toFixed(4)}, ${d.ny.toFixed(4)}, ${d.nz.toFixed(4)}]
+    </div>
+    <div style="margin-bottom:8px;">
+      <span style="color:#8F8F8F;">θ =</span> ${d.angleTheta}°
+      &nbsp;→&nbsp;
+      <span style="color:#8F8F8F;">θ/2 =</span> ${(d.angleTheta / 2).toFixed(2)}°
+      = ${d.halfT.toFixed(4)} rad
+    </div>
+    <div style="margin-bottom:4px;">
+      <span style="color:#33C6F4;">w</span> = cos(θ/2) = <b>${fmt(d.w)}</b>
+    </div>
+    <div style="margin-bottom:12px;">
+      <span style="color:#33C6F4;">vec</span> = û · sin(θ/2) = [${fmt(d.nx)} · ${fmt(d.sinH)}] = [<b>${fmt(d.qx)}</b>, <b>${fmt(d.qy)}</b>, <b>${fmt(d.qz)}</b>]
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:220px;background:#1a1a2e;border:2px solid #33C6F4;border-radius:6px;padding:10px 14px;">
+        <div style="color:#33C6F4;font-weight:bold;margin-bottom:6px;font-size:0.8rem;">🔹 Isaac Sim (USD) — scalar-first</div>
+        <div style="font-size:1.05rem;">
+          [<span style="color:#FFD600;font-weight:bold;">${fmt(d.w)}</span>,
+           <span style="color:#FF4444;">${fmt(d.qx)}</span>,
+           <span style="color:#44FF44;">${fmt(d.qy)}</span>,
+           <span style="color:#3399FF;">${fmt(d.qz)}</span>]
+        </div>
+        <div style="color:#555;font-size:0.7rem;margin-top:4px;">[<span style="color:#FFD600;">w</span>, x, y, z]</div>
+      </div>
+      <div style="flex:1;min-width:220px;background:#1a0a0a;border:2px solid #FF6B6B;border-radius:6px;padding:10px 14px;">
+        <div style="color:#FF6B6B;font-weight:bold;margin-bottom:6px;font-size:0.8rem;">🔸 PhysX — scalar-last</div>
+        <div style="font-size:1.05rem;">
+          [<span style="color:#FF4444;">${fmt(d.qx)}</span>,
+           <span style="color:#44FF44;">${fmt(d.qy)}</span>,
+           <span style="color:#3399FF;">${fmt(d.qz)}</span>,
+           <span style="color:#FFD600;font-weight:bold;">${fmt(d.w)}</span>]
+        </div>
+        <div style="color:#555;font-size:0.7rem;margin-top:4px;">[x, y, z, <span style="color:#FFD600;">w</span>]</div>
+      </div>
+    </div>
+  </div>`;
+  return html`${html_str}`;
+}
+```
+
+
+
 ## The Mechanics of Connectivity: Kinematic Pairs
 If a robot consisted only of unconnected rigid bodies, it would be a flock rather than a mechanism. The bodies must be constrained relative to one another to transmit force and motion. The connection between two rigid bodies is called a joint, or in classical mechanics, a kinematic pair. Joints function by removing degrees of freedom. By connecting two bodies, a joint imposes constraints that prevent certain relative motions while permitting others. The number of independent motions permitted by the joint is its specific degree of freedom, denoted as $f$.
 

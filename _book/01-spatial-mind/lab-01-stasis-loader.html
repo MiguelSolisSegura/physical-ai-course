@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Lab 1: The Stasis Loader – Foundations of Physical AI</title>
+<title>5&nbsp; Lab 1: The Stasis Loader – The Vlexyan Protocol</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -34,15 +37,14 @@ ul.task-list li input[type="checkbox"] {
 <link href="../01-spatial-mind/03-kinematic-chain.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-cdc1deec1a2a59687a803d9530c4bcd9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-6264bf940eb4076abc14d2abd41cfb1b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -83,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-spatial-mind/index.html">PART I: THE SPATIAL MIND (KINEMATICS)</a></li><li class="breadcrumb-item"><a href="../01-spatial-mind/lab-01-stasis-loader.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1: The Stasis Loader</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-spatial-mind/index.html">Part I: The Spatial Mind (Kinematics)</a></li><li class="breadcrumb-item"><a href="../01-spatial-mind/lab-01-stasis-loader.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1: The Stasis Loader</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -93,12 +95,12 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Foundations of Physical AI</a> 
+      <a href="../">The Vlexyan Protocol</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -117,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">PART I: THE SPATIAL MIND (KINEMATICS)</span></a>
+ <span class="menu-text">Part I: The Spatial Mind (Kinematics)</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -132,7 +134,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01-spatial-mind/01-robot-morphology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Robot Morphology &amp; Topology.</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Robot Morphology &amp; Topology</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -157,13 +159,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">PART II: THE VISUAL LINK (ACTIVE PERCEPTION)</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part II: The Visual Link (Active Perception)</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-visual-link/index.html" class="sidebar-item-text sidebar-link">
@@ -198,13 +200,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">PART III: THE GEOMETRIC NAVIGATOR (MOTION PLANNING)</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part III: The Geometric Navigator (Motion Planning)</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-geometric-navigator/index.html" class="sidebar-item-text sidebar-link">
@@ -239,13 +241,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">PART IV: THE ADAPTIVE LEARNER (REINFORCEMENT LEARNING)</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part IV: The Adaptive Learner (Reinforcement Learning)</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-adaptive-learner/index.html" class="sidebar-item-text sidebar-link">
@@ -288,27 +290,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#objective" id="toc-objective" class="nav-link active" data-scroll-target="#objective">Objective</a></li>
-  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks">Tasks</a>
+  <li><a href="#objective" id="toc-objective" class="nav-link active" data-scroll-target="#objective"><span class="header-section-number">5.1</span> Objective</a></li>
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks"><span class="header-section-number">5.2</span> Tasks</a>
   <ul class="collapse">
-  <li><a href="#isaac-core-lula-solver-integration" id="toc-isaac-core-lula-solver-integration" class="nav-link" data-scroll-target="#isaac-core-lula-solver-integration">1. Isaac Core &amp; Lula Solver integration</a></li>
-  <li><a href="#fk-verification-vs.-ground-truth" id="toc-fk-verification-vs.-ground-truth" class="nav-link" data-scroll-target="#fk-verification-vs.-ground-truth">2. FK verification vs.&nbsp;Ground Truth</a></li>
-  <li><a href="#handling-unreachable-targets-and-singularities" id="toc-handling-unreachable-targets-and-singularities" class="nav-link" data-scroll-target="#handling-unreachable-targets-and-singularities">3. Handling unreachable targets and singularities</a></li>
+  <li><a href="#isaac-core-lula-solver-integration" id="toc-isaac-core-lula-solver-integration" class="nav-link" data-scroll-target="#isaac-core-lula-solver-integration"><span class="header-section-number">5.2.1</span> 1. Isaac Core &amp; Lula Solver integration</a></li>
+  <li><a href="#fk-verification-vs.-ground-truth" id="toc-fk-verification-vs.-ground-truth" class="nav-link" data-scroll-target="#fk-verification-vs.-ground-truth"><span class="header-section-number">5.2.2</span> 2. FK verification vs.&nbsp;Ground Truth</a></li>
+  <li><a href="#handling-unreachable-targets-and-singularities" id="toc-handling-unreachable-targets-and-singularities" class="nav-link" data-scroll-target="#handling-unreachable-targets-and-singularities"><span class="header-section-number">5.2.3</span> 3. Handling unreachable targets and singularities</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-spatial-mind/index.html">PART I: THE SPATIAL MIND (KINEMATICS)</a></li><li class="breadcrumb-item"><a href="../01-spatial-mind/lab-01-stasis-loader.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1: The Stasis Loader</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-spatial-mind/index.html">Part I: The Spatial Mind (Kinematics)</a></li><li class="breadcrumb-item"><a href="../01-spatial-mind/lab-01-stasis-loader.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1: The Stasis Loader</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1: The Stasis Loader</span></h1>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -320,20 +322,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="objective" class="level2">
-<h2 class="anchored" data-anchor-id="objective">Objective</h2>
+<section id="objective" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="objective"><span class="header-section-number">5.1</span> Objective</h2>
 <p>Integrate Isaac Core with Lula Solver to manipulate a robotic arm.</p>
 </section>
-<section id="tasks" class="level2">
-<h2 class="anchored" data-anchor-id="tasks">Tasks</h2>
-<section id="isaac-core-lula-solver-integration" class="level3">
-<h3 class="anchored" data-anchor-id="isaac-core-lula-solver-integration">1. Isaac Core &amp; Lula Solver integration</h3>
+<section id="tasks" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="tasks"><span class="header-section-number">5.2</span> Tasks</h2>
+<section id="isaac-core-lula-solver-integration" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="isaac-core-lula-solver-integration"><span class="header-section-number">5.2.1</span> 1. Isaac Core &amp; Lula Solver integration</h3>
 </section>
-<section id="fk-verification-vs.-ground-truth" class="level3">
-<h3 class="anchored" data-anchor-id="fk-verification-vs.-ground-truth">2. FK verification vs.&nbsp;Ground Truth</h3>
+<section id="fk-verification-vs.-ground-truth" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="fk-verification-vs.-ground-truth"><span class="header-section-number">5.2.2</span> 2. FK verification vs.&nbsp;Ground Truth</h3>
 </section>
-<section id="handling-unreachable-targets-and-singularities" class="level3">
-<h3 class="anchored" data-anchor-id="handling-unreachable-targets-and-singularities">3. Handling unreachable targets and singularities</h3>
+<section id="handling-unreachable-targets-and-singularities" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="handling-unreachable-targets-and-singularities"><span class="header-section-number">5.2.3</span> 3. Handling unreachable targets and singularities</h3>
 
 
 </section>
@@ -740,7 +742,7 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../01-spatial-mind/03-kinematic-chain.html" class="pagination-link" aria-label="The Kinematic Chain">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Kinematic Chain</span></span>

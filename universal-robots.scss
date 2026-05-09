@@ -96,20 +96,39 @@ input[type="range"] {
     appearance: none;
     background: transparent;
     cursor: pointer;
+    accent-color: $ur-blue-neon;
+    width: 100%;
+}
+
+// Webkit (Chrome, Edge, Safari) — track
+input[type="range"]::-webkit-slider-runnable-track {
+    background: $ur-grey-aluminum !important;
+    height: 4px;
+    border-radius: 2px;
 }
 
 input[type="range"]::-webkit-slider-track {
-    background: $ur-grey-aluminum;
+    background: $ur-grey-aluminum !important;
     height: 4px;
     border-radius: 2px;
 }
 
+// Firefox — track
 input[type="range"]::-moz-range-track {
-    background: $ur-grey-aluminum;
+    background: $ur-grey-aluminum !important;
+    height: 4px;
+    border-radius: 2px;
+    border: none;
+}
+
+// Firefox — filled portion left of thumb
+input[type="range"]::-moz-range-progress {
+    background: $ur-blue-neon;
     height: 4px;
     border-radius: 2px;
 }
 
+// Webkit thumb
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -122,6 +141,7 @@ input[type="range"]::-webkit-slider-thumb {
     margin-top: -6px;
 }
 
+// Firefox thumb
 input[type="range"]::-moz-range-thumb {
     width: 16px;
     height: 16px;
@@ -137,4 +157,20 @@ input[type="range"]:focus::-webkit-slider-thumb {
 
 input[type="range"]:focus::-moz-range-thumb {
     box-shadow: 0 0 12px rgba($ur-blue-neon, 0.6);
+}
+
+// OJS wraps inputs inside a <form> — ensure track colour survives nesting
+form input[type="range"]::-webkit-slider-runnable-track,
+.observablehq input[type="range"]::-webkit-slider-runnable-track {
+    background: $ur-grey-aluminum !important;
+    height: 4px;
+    border-radius: 2px;
+}
+
+form input[type="range"]::-moz-range-track,
+.observablehq input[type="range"]::-moz-range-track {
+    background: $ur-grey-aluminum !important;
+    height: 4px;
+    border-radius: 2px;
+    border: none;
 }
